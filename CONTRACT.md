@@ -1,6 +1,7 @@
 # alpizar2-bheng2-jorgejc2-miguel5
 Signatures:
 Brennan Eng
+Edson W Alpizar
 
 **CS 225 Data Structures**
 **Team Contract (miguel5-bheng2-jorgejc2- alpizar2)**
