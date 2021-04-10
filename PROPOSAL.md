@@ -14,26 +14,26 @@ The last of our algorithms is going to be a binary search tree (BST) Once there 
 
 1. **Timeline**
 
-  April 5 - Initial meetup with all group members and discuss proposal ideas 
+  1. April 5 - Initial meetup with all group members and discuss proposal ideas 
 
-  April 9 - finalize and submit project proposal and team contract 
+  1. April 9 - finalize and submit project proposal and team contract 
 
-  April 11- Begin analyzing our API data and figure out how we will test our algorithms
+  1. April 11- Begin analyzing our API data and figure out how we will test our algorithms
 
-  April 13 - setup initial repository and Makefile
+  1. April 13 - setup initial repository and Makefile
 
-  April 18 - work on BST and make sure it passes test cases
+  1. April 18 - work on BST and make sure it passes test cases
 
-  April 20 - take an image and edit it to pass tests
+  1. April 20 - take an image and edit it to pass tests
 
-  April 25 - work on graph output algorithm
+  1. April 25 - work on graph output algorithm
 
-  April 27- finish both algorithms completely
+  1. April 27- finish both algorithms completely
 
-  May 2 - Finish up our code and begin writing our final report 
+  1. May 2 - Finish up our code and begin writing our final report 
 
-  May 4 - plan and record our final presentation 
+  1. May 4 - plan and record our final presentation 
 
-  May 9 - make sure everything is functioning for final project submission 
+  1. May 9 - make sure everything is functioning for final project submission 
 
-  May 10- make final changes to presentation and submit final project 
+  1. May 10- make final changes to presentation and submit final project 
