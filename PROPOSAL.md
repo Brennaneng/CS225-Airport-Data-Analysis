@@ -13,26 +13,27 @@ One of our algorithms will be Graph output where we will manipulate the PNG of t
 The last of our algorithms is going to be a binary search tree (BST) Once there is an active case, it will be incremented into the state counter and it will be placed into a BST ranked based on most covid cases as the most far right value. These will be used to judge the gradient that needs to be colored.f
 
 1. **Timeline**
-April 5 - Initial meetup with all group members and discuss proposal ideas 
 
-April 9 - finalize and submit project proposal and team contract 
+  April 5 - Initial meetup with all group members and discuss proposal ideas 
 
-April 11- Begin analyzing our API data and figure out how we will test our algorithms
+  April 9 - finalize and submit project proposal and team contract 
 
-April 13 - setup initial repository and Makefile
+  April 11- Begin analyzing our API data and figure out how we will test our algorithms
 
-April 18 - work on BST and make sure it passes test cases
+  April 13 - setup initial repository and Makefile
 
-April 20 - take an image and edit it to pass tests
+  April 18 - work on BST and make sure it passes test cases
 
-April 25 - work on graph output algorithm
+  April 20 - take an image and edit it to pass tests
 
-April 27- finish both algorithms completely
+  April 25 - work on graph output algorithm
 
-May 2 - Finish up our code and begin writing our final report 
+  April 27- finish both algorithms completely
 
-May 4 - plan and record our final presentation 
+  May 2 - Finish up our code and begin writing our final report 
 
-May 9 - make sure everything is functioning for final project submission 
+  May 4 - plan and record our final presentation 
 
-May 10- make final changes to presentation and submit final project 
+  May 9 - make sure everything is functioning for final project submission 
+
+  May 10- make final changes to presentation and submit final project 
