@@ -14,7 +14,7 @@ The last of our algorithms is going to be a binary search tree (BST) Once there 
 
 1. **Timeline**
 
-  1. April 5 - Initial meetup with all group members and discuss proposal ideas 
+  * April 5 - Initial meetup with all group members and discuss proposal ideas 
 
   1. April 9 - finalize and submit project proposal and team contract 
 
