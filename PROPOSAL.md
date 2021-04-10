@@ -10,6 +10,6 @@
 
 One of our algorithms will be Graph output where we will manipulate the PNG of the United States graph in order to reflect visually how severe the case based on color.
 
-The last of our algorithms is going to be a binary search tree (BST) Once there is an active case, it will be incremented into the state counter and it will be placed into a BST ranked based on most covid cases as the most far right value. These will be used to judge the gradient that needs to be colored.
+The last of our algorithms is going to be a binary search tree (BST) Once there is an active case, it will be incremented into the state counter and it will be placed into a BST ranked based on most covid cases as the most far right value. These will be used to judge the gradient that needs to be colored.f
 
 1. **Timeline**
