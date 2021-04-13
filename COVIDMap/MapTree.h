@@ -7,5 +7,6 @@ class helloWorld{
 
     helloWorld();
     void printHello();
+    void printPeepeePoopoo();
 
 };
