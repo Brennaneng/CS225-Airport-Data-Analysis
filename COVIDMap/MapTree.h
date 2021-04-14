@@ -1,12 +1,15 @@
+#pragma once
+
 #include <iostream>
+#include "binarytree.h"
 
 using namespace std;
 
-class helloWorld{
+class stateMap{
     public:
 
-    helloWorld();
-    void printHello();
+    stateMap();
+    void printHello(string one, string two);
     void printPeepeePoopoo();
 
 };

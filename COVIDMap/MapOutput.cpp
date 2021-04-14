@@ -2,8 +2,8 @@
 
 int main() {
 
-    helloWorld hello;
-    hello.printHello();
+    stateMap hello;
+    hello.printHello("ar", "az");
     hello.printPeepeePoopoo();
 
 

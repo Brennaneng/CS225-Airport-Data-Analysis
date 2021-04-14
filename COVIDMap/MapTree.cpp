@@ -1,11 +1,14 @@
 #include "MapTree.h"
 
-helloWorld::helloWorld(){}
+stateMap::stateMap(){}
 
-void helloWorld::printHello(){
-    cout<< "Hello World" << endl;
+void stateMap::printHello(string one, string two){
+    if(one < two)
+        cout<< "Hello World" << endl;
+    else 
+        cout<< "Shut up" << endl;
 }
 
-void helloWorld::printPeepeePoopoo(){
+void stateMap::printPeepeePoopoo(){
     cout<< "Peepee Poopoo and your mother" <<endl;
 }
