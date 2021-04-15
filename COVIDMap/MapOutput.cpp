@@ -1,4 +1,6 @@
 #include "MapTree.h"
+#include "TreeTraversals/PreorderTraversal.h"
+#include "TreeTraversals/InorderTraversal.h"
 
 int main() {
 
