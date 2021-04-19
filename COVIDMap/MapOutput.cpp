@@ -13,8 +13,8 @@ int main() {
     hello.printPeepeePoopoo();
     vector<vector<string> > * s = read_file();
     for(unsigned int i = 0; i < s->size(); i++){
-        
-        cout << s[i] << endl;
+        vector<string> v = s[i];
+        cout << v[0] << endl;
     }
 
 
