@@ -10,6 +10,9 @@ MapOutput.o: MapOutput.cpp
 MapTree.o: MapTree.cpp 
 	$(CC) $(CFLAGS) -c MapTree.cpp 
 
+ReadFile.o: ReadFile.cpp
+	$(CC) $(CFLAGS) -c ReadFile.cpp
+
 clean:
 	rm *.o COVIDMap
 
