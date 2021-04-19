@@ -1,6 +1,10 @@
 #include "MapTree.h"
 #include "TreeTraversals/PreorderTraversal.h"
 #include "TreeTraversals/InorderTraversal.h"
+#include "ReadFile.h"
+#include <vector>
+#include <iostream>
+using namespace std;
 
 //here is where we will create a map object. We will specify what kind of map where are working with meaning
 //that if we want a map for deaths, we create a map object called deaths. If we do a map for deaths, then we will

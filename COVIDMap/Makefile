@@ -9,6 +9,9 @@ main.o: main.cpp
 
 
 
+ReadFile.o: ReadFile.cpp
+	$(CC) $(CFLAGS) -c ReadFile.cpp
+
 clean:
 	rm *.o COVIDMap
 
