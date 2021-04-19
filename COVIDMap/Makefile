@@ -1,14 +1,13 @@
 CC = g++
 CFLAGS = -Wall -g
 
-COVIDMap: MapOutput.o MapTree.o 
-	$(CC) $(CFLAGS) -o COVIDMap MapOutput.o MapTree.o 
+COVIDMap: main.o  
+	$(CC) $(CFLAGS) -o COVIDMap main.o 
 
-MapOutput.o: MapOutput.cpp
-	$(CC) $(CFLAGS) -c MapOutput.cpp
+main.o: main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
 
-MapTree.o: MapTree.cpp 
-	$(CC) $(CFLAGS) -c MapTree.cpp 
+
 
 clean:
 	rm *.o COVIDMap
