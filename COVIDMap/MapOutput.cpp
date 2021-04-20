@@ -1,7 +1,8 @@
-#include "MapTree.h"
+#include "MapOutput.h"
 #include "TreeTraversals/PreorderTraversal.h"
 #include "TreeTraversals/InorderTraversal.h"
 #include "ReadFile.h"
+#include "avltree.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -20,3 +21,30 @@ using namespace std;
 //Private member: vector<PNG> mapPictures
 //each index will be a map for a certain date. we have to create a function that uses the binary tree to get data,
 //and then access this vector, and alter the png image for the corresponding month
+
+
+
+
+//One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
+Map::Map(){
+    AVLTree<string> * tree = new AVLTree();
+    for(int i = 0; i < 50; i++){
+        vector<int> * empty = new vector<int>;
+        empty->resize(15);
+        tree.insert(States[i], empty);
+    }
+    _tree = tree;
+} 
+Map::Map(vector<vector<string>> file){
+    Map();
+    for(auto i = 0; i < file.size(); i++){
+        vector<string> curr_line = file[i];
+        string curr_date = curr_line[1];
+        string curr_state = curr_line[2];
+        string curr_deaths = curr_line[3];
+        vector<int> * temp = tree.find(curr_state);
+        int date = finddate(curr_date);
+        temp->at(date) = curr_deaths;
+    }
+
+}
