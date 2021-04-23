@@ -1,14 +1,30 @@
-#include "MapTree.h"
+#include "avltree.h"
+#include "ReadFile.h"
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <fstream>
 
-stateMap::stateMap(){}
+using namespace std;
+using namespace functions;
 
-void stateMap::printHello(string one, string two){
-    if(one < two)
-        cout<< "Hello World" << endl;
-    else 
-        cout<< "Shut up" << endl;
-}
+int main(){
 
-void stateMap::printPeepeePoopoo(){
-    cout<< "Peepee Poopoo and your mother" <<endl;
+    cout<< "hello world" << endl;
+    AVLTree<int, int> tree;
+    tree.insert(1,2);
+    tree.insert(4,5);
+    tree.insert(5,4);
+    std::vector<int> solnTraversal;
+    solnTraversal.push_back(4);
+    solnTraversal.push_back(1);
+    solnTraversal.push_back(5);
+    std::vector<string> solnFuncCalls;
+    solnFuncCalls.push_back("rotateLeft");
+
+    vector<vector<string> >  dataVector = functions::read_file();
+    
+    
+
+    return 0;
 }

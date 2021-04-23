@@ -2,9 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "ReadFile.h"
+ #include "ReadFile.h"
 using namespace std;
-vector<vector<string> > * read_file(){
+
+namespace functions{
+vector<vector<string> >  read_file(){
     //creating file pointer
     ifstream file;
 
@@ -13,7 +15,7 @@ vector<vector<string> > * read_file(){
 
     //Created two vectors, TotalFile creates a vector of vectors that takes in each row called a vector datapoint
     //datapoint creates a set of values enumerated by ',' which means each index of the datapoint will be date, state, and deaths
-    vector<vector<string>> * TotalFile;
+    vector<vector<string> >  TotalFile;
     vector<string> datapoint;
     //reads while the file still has values to be read
     while(file.good()){
@@ -28,4 +30,5 @@ vector<vector<string> > * read_file(){
     }
     cout<<"Done"<<endl;
     return TotalFile;
+}
 }

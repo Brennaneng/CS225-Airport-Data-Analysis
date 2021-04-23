@@ -3,4 +3,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-vector<vector<string> > * read_file();
+
+namespace functions{
+vector<vector<string> >  read_file();
+}
