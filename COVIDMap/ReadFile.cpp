@@ -22,10 +22,10 @@ vector<vector<string> >  read_file(){
         //creates a temporary string called line to take each 
         string line;
         for(int count = 0; count < 3; count++){
-            getLine(file, line, ',');
+            std::getLine(file, line, ',');
             datapoint.push_back(line); 
         }
-        TotalFile->push_back(datapoint);
+        TotalFile.push_back(datapoint);
         datapoint.clear();
     }
     cout<<"Done"<<endl;
@@ -35,11 +35,12 @@ vector<vector<string> >  read_file(){
 //@param string full_date: the full date (e.g 3/6/2021)
 vector<string> * read_date(string full_date) {
 	istringstream ss(full_date);
-	tring token;
+	string token;
 	vector<string> dates;
 	while(std::getline(ss, token, '/')) {
 		dates.push_back(token);
 	}
 
 	return dates;
+}
 }
