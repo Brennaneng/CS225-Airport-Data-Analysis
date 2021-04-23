@@ -6,7 +6,7 @@
 using namespace std;
 
 namespace functions{
-vector<vector<string> >  read_file(){
+vector<vector<string> > * read_file(){
     //creating file pointer
     ifstream file;
 
@@ -15,7 +15,7 @@ vector<vector<string> >  read_file(){
 
     //Created two vectors, TotalFile creates a vector of vectors that takes in each row called a vector datapoint
     //datapoint creates a set of values enumerated by ',' which means each index of the datapoint will be date, state, and deaths
-    vector<vector<string> >  TotalFile;
+    vector<vector<string> > * TotalFile;
     vector<string> datapoint;
     //reads while the file still has values to be read
     while(file.good()){
@@ -25,7 +25,7 @@ vector<vector<string> >  read_file(){
             std::getLine(file, line, ',');
             datapoint.push_back(line); 
         }
-        TotalFile.push_back(datapoint);
+        TotalFile->push_back(datapoint);
         datapoint.clear();
     }
     cout<<"Done"<<endl;
