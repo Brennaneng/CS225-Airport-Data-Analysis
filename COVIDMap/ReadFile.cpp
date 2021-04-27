@@ -34,7 +34,7 @@ vector<vector<string> > * read_file(){
 // divides the date to 3 strings. To access dates easier 
 //@param string full_date: the full date (e.g 3/6/2021)
 vector<string> * read_date(string full_date) {
-	istringstream ss(full_date);
+	istringstream ss = full_date ;
 	string token;
 	vector<string> dates;
 	while(std::getline(ss, token, '/')) {
