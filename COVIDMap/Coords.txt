@@ -1,0 +1,54 @@
+Coordinates for each specific state
+
+
+States
+Alabama AL – 651, 410 
+Alaska AK- 
+Arizona AZ – 198, 360
+Arkansas AR – 543, 375
+California CA – 69, 282
+Colorado CO – 316, 271
+Connecticut CT – 858, 178
+Delaware DE – 826, 247
+Florida FL – 760, 498
+Georgia GA – 715, 408
+Hawaii HI
+Idaho ID – 192, 142
+Illinois IL – 594, 255 
+Indiana IN – 644, 251
+Iowa IA – 518, 211
+Kansas KS – 442,289
+Kentucky KY – 666,305
+Louisiana LA – 550, 464 
+Maine ME – 892, 80
+Maryland MD – 802, 243
+Massachusetts MA – 868, 156
+Michigan MI – 615, 117 and 663, 172 // call floodfill twice since its split into two parts 
+Minnesota MN – 502, 123
+Mississippi MS – 596, 417
+Missouri MO – 538, 297 
+Montana MT – 273, 84
+Nebraska NE – 420, 223
+Nevada NV – 127, 231
+New Hampshire NH – 864,128
+New Jersey NJ – 837, 215
+New Mexico NM – 299, 373
+New York NY – 805, 157
+North Carolina NC – 782, 332
+North Dakota ND – 412,96
+Ohio OH – 702, 241
+Oklahoma OK – 458,364
+Oregon OR – 92, 123
+Pennsylvania PA – 782, 213
+Rhode Island RI – 877,171
+South Carolina SC – 756, 375
+South Dakota SD – 413,159
+Tennessee TN – 649, 341
+Texas TX – 426,448
+Utah UT – 220, 258
+Vermont VT – 846, 126
+Virginia VA – 783, 285 
+Washington WA – 117, 53
+West Virginia WV – 738, 272
+Wisconsin WI – 578, 156
+Wyoming WY – 290, 183 
