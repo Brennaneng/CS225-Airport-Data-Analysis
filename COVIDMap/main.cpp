@@ -23,6 +23,11 @@ int main(){
     solnFuncCalls.push_back("rotateLeft");
 
     vector<vector<string> >  dataVector = functions::read_file();
+    for(int i = 0; i < 30; i++){
+        for(int j =0; j < 3; j++){
+            cout<<dataVector[i][j] <<endl;
+        }
+    }
     
     
 

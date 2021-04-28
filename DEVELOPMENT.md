@@ -27,3 +27,12 @@
     * Miguel
 
     * Brennan worked on finishing readfile in addition to the new sorted vector to sort the raw data vector
+
+1. **Log for 4/25/2021**
+    * Brennan worked on making makefile and readfile compatible
+
+1. **Log for 4/27/2021**
+    We decided we no longer want to pursue the animate function and we decided we wanted to use the data structure to map out the line of shortest
+    path between two epicenters through our coordinates.
+    * Brennan finished ReadFile and is working on paths.cpp to find shortest path of 2 COVID epicenters
+    
