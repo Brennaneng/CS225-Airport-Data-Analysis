@@ -2,12 +2,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "binarytree.h"
+#include "avltree.h"
+
+using namespace std;
 
 class Map{
     public:
     Map(); //this will create the binary tree
-    Map(vector<vector<string>> file); //this takes in the dataset file to be organized
+    Map(vector<vector<string> > file); //this takes in the dataset file to be 
+    void insertStates();
 
     struct Node {
         string StateName;
@@ -15,8 +18,10 @@ class Map{
         std::vector<int> stats;
         Node * left;
         Node * right;
-    }
+    };
     private:
-    BinaryTree<string> * _tree;
+    AVLTree<string,vector<int> > * _tree;
 
-}
+    vector<string> * States; 
+
+};

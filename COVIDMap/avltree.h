@@ -41,6 +41,9 @@ class AVLTree
             : key(newKey), value(newValue), left(NULL), right(NULL), height(0)
         {
         }
+        void replaceValue(const V& newValue){
+          value = newValue;
+        }
     };
 
   public:
@@ -78,6 +81,9 @@ class AVLTree
      * @param value The value associated with the key
      */
     void insert(const K& key, const V& value);
+
+    void replace(const K& key, const V& value);
+
 
     /**
      * Removes a key from the AVLTree. The key is assumed to exist in the tree.
@@ -130,6 +136,9 @@ class AVLTree
      * The root of the tree.
      */
     Node* root;
+
+    AVLTree::Node* findNode(Node* subtree, const K& key);
+
 
     /**
      * Private helper function for the public #insert function.

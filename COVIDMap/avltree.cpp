@@ -125,6 +125,30 @@ void AVLTree<K, V>::insert(Node*& subtree, const K& key, const V& value)
     rebalance(subtree);
 }
 
+template<class K, class V>
+void AVLTree<K, V>::replace(const K& key, const V& value){
+    Node* currNode = findNode(root, key);
+    if(currNode == NULL)
+        return;
+    currNode->replaceValue(value);
+    return;
+
+}
+template<class K, class V>
+typename AVLTree<K, V>::Node* AVLTree<K, V>::findNode(Node* subtree, const K& key){
+    if (subtree == NULL)
+        return NULL;
+    else if (key == subtree->key)
+        return subtree;
+    else {
+        if (key < subtree->key)
+            return findNode(subtree->left, key);
+        else
+            return findNode(subtree->right, key);
+    }
+}
+
+
 template <class K, class V>
 void AVLTree<K, V>::remove(const K& key)
 {

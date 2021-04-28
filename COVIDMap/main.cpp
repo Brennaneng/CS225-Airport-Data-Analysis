@@ -1,5 +1,6 @@
 #include "avltree.h"
 #include "ReadFile.h"
+#include "MapOutput.h"
 #include <iostream>
 #include <vector>
 #include <sstream>
@@ -28,7 +29,7 @@ int main(){
             cout<<dataVector[i][j] <<endl;
         }
     }
-    
+    Map currMap;
     
 
     return 0;
