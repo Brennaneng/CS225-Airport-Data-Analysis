@@ -42,16 +42,21 @@ Map::Map(vector<vector<string>> file){
         string curr_deaths = curr_line[2];
         int curr_deaths_int = stoi(curr_deaths);
         //since the date in the data is given like (3/15/2021) we need to access the month and the year so we put it in a vector and return that vector.
-        vector<string> curr_date = read_date(curr_line[0]);
+        vector<string> curr_date = {"2020","2020"};//read_date(curr_line[0]);
         string cur_month = curr_date[0];
         string cur_year = curr_date[2];
-        int idx = returnDateIndex(cur_month, cur_year);
+        int idx = 1;//returnDateIndex(cur_month, cur_year);
         vector<int> nodeData = _tree->find(curr_state);
         nodeData[idx] = curr_deaths_int;
         _tree->replace(curr_state,nodeData);
     }
 
 };
+// Map::generateMap(Node* start_){
+
+
+
+// }
 void Map::insertStates(){
 States = new vector<string> ({"AK",
 "AL",

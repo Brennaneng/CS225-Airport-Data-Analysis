@@ -19,14 +19,24 @@ class Map{
     Map(vector<vector<string> > file); //this takes in the dataset file to be 
     void insertStates();
 
-    struct Node {
-        string StateName;
-        //index refers to date;
-        std::vector<int> stats;
-        Node * left;
-        Node * right;
-    };
+    
     private:
+    struct Node {
+        int key;
+        string value;
+        vector<Node*> nodes;
+
+        /**
+         * Node constructor; sets children to point to `NULL`.
+         * @param newKey The object to use as a key
+         * @param newValue The templated data element that the constructed
+         *  node will hold.
+         */
+        Node(const int& newKey, const string& newValue)
+            : key(newKey), value(newValue)
+        {
+        }
+    };
     AVLTree<string,vector<int> > * _tree;
 
     vector<string> * States; 

@@ -2,6 +2,7 @@
  
 using namespace std;
 namespace functions {
+<<<<<<< HEAD
 vector<pair<int,int> > read_routes()  {
     
     //creating file pointer
@@ -43,30 +44,50 @@ vector<pair<int,int> > read_routes()  {
     return TotalFile;
 }
 vector<vector<string> > read_file() {
+=======
+
+vector<vector<string>> read_file() {
+>>>>>>> 84efd7bbd55a37a2248baa2b38f356181a735cbc
     //creating file pointer
     ifstream file;
 
     //opens file to be read
-    file.open("all-states-history-death.csv");
+    file.open("airports_filtered.csv");
 
     //Created two vectors, TotalFile creates a vector of vectors that takes in each row called a vector datapoint
     //datapoint creates a set of values enumerated by ',' which means each index of the datapoint will be date, state, and deaths
     vector<vector<string> > TotalFile;
-    vector<string> datapoint;
+    vector<string> line;
     //reads while the file still has values to be read
     while(file.good()){
         //creates a temporary string called line to take each 
+<<<<<<< HEAD
         string line;
         for(int count = 0; count < 3; count++){
             getline(file, line, ',');
             datapoint.push_back(line); 
+=======
+        string datapoint;
+        for(int count = 0; count < 5; count++){
+            std::getline(file, datapoint, ',');
+            if(count == 2){
+                if(datapoint != 'United States'){
+                    line.clear();
+                    std::getline(file, datapoint, ','); //skips next two datapoints which are coordinates
+                    std::getline(file, datapoint, ',');
+                    continue; //continues onto next iteration which should be next line
+
+                }
+            }
+            line.push_back(datapoint); 
+>>>>>>> 84efd7bbd55a37a2248baa2b38f356181a735cbc
         }
-        TotalFile.push_back(datapoint);
-        datapoint.clear();
+        TotalFile.push_back(line);
+        line.clear();
     }
 
     return TotalFile;
-}
+};
 
 vector<string> read_date(string full_date) {
     std::istringstream ss(full_date);
@@ -77,7 +98,7 @@ vector<string> read_date(string full_date) {
     }
 
     return dates;
-}
+};
 int returnDateIndex(string month, string year){
     int x = std::stoi(month); 
     --x;
@@ -92,5 +113,5 @@ int returnDateIndex(string month, string year){
 }
 void clean_data() {
     
-}
+};
 }
