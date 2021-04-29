@@ -6,22 +6,31 @@ vector<vector<string>> read_file() {
     ifstream file;
 
     //opens file to be read
-    file.open("all-states-history-death.csv");
+    file.open("airports_filtered.csv");
 
     //Created two vectors, TotalFile creates a vector of vectors that takes in each row called a vector datapoint
     //datapoint creates a set of values enumerated by ',' which means each index of the datapoint will be date, state, and deaths
     vector<vector<string> > TotalFile;
-    vector<string> datapoint;
+    vector<string> line;
     //reads while the file still has values to be read
     while(file.good()){
         //creates a temporary string called line to take each 
-        string line;
-        for(int count = 0; count < 3; count++){
-            std::getline(file, line, ',');
-            datapoint.push_back(line); 
+        string datapoint;
+        for(int count = 0; count < 5; count++){
+            std::getline(file, datapoint, ',');
+            if(count == 2){
+                if(datapoint != 'United States'){
+                    line.clear();
+                    std::getline(file, datapoint, ','); //skips next two datapoints which are coordinates
+                    std::getline(file, datapoint, ',');
+                    continue; //continues onto next iteration which should be next line
+
+                }
+            }
+            line.push_back(datapoint); 
         }
-        TotalFile.push_back(datapoint);
-        datapoint.clear();
+        TotalFile.push_back(line);
+        line.clear();
     }
     cout<<"Done"<<endl;
     return TotalFile;
