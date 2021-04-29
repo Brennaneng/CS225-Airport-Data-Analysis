@@ -36,22 +36,27 @@ Map::Map(vector<vector<string>> file){
     Map();
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
-        Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
+        //Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
         vector<string> curr_line = file[i];
         string curr_state = curr_line[1];
         string curr_deaths = curr_line[2];
         int curr_deaths_int = stoi(curr_deaths);
         //since the date in the data is given like (3/15/2021) we need to access the month and the year so we put it in a vector and return that vector.
-        vector<string> curr_date = read_date(curr_line[0]);
+        vector<string> curr_date = {"2020","2020"};//read_date(curr_line[0]);
         string cur_month = curr_date[0];
         string cur_year = curr_date[2];
-        int idx = returnDateIndex(cur_month, cur_year);
+        int idx = 1;//returnDateIndex(cur_month, cur_year);
         vector<int> nodeData = _tree->find(curr_state);
         nodeData[idx] = curr_deaths_int;
         _tree->replace(curr_state,nodeData);
     }
 
 };
+// Map::generateMap(Node* start_){
+
+
+
+// }
 void Map::insertStates(){
 States = new vector<string> ({"AK",
 "AL",
