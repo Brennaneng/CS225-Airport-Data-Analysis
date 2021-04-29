@@ -24,21 +24,13 @@ OBJS += cs225/HSLAPixel.o cs225/PNG.o cs225/lodepng/lodepng.o
 DEPFILE_FLAGS = -MMD -MP
 
 # Provide lots of helpful warning/errors:
-<<<<<<< HEAD
-WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable
-=======
 WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Flags for compile:
 CXXFLAGS += $(CS225) -std=c++1y -stdlib=libc++ -O0 $(WARNINGS) $(DEPFILE_FLAGS) -g -c
 
 # Flags for linking:
-<<<<<<< HEAD
-LDFLAGS += $(CS225) -std=c++1y -stdlib=libc++
-=======
 LDFLAGS += $(CS225) -std=c++1y -stdlib=libc++ -lc++abi
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Rule for `all` (first/default rule):
 all: $(EXE)
@@ -46,13 +38,8 @@ all: $(EXE)
 # Rule for linking the final executable:
 # - $(EXE) depends on all object files in $(OBJS)
 # - `patsubst` function adds the directory name $(OBJS_DIR) before every object file
-<<<<<<< HEAD
-$(EXE): $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS))
-	$(LD) $^ $(LDFLAGS) -o $@
-=======
 $(EXE): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS))
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Ensure .objs/ exists:
 $(OBJS_DIR):
@@ -60,9 +47,6 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)/cs225
 	@mkdir -p $(OBJS_DIR)/cs225/catch
 	@mkdir -p $(OBJS_DIR)/cs225/lodepng
-<<<<<<< HEAD
-	@mkdir -p $(OBJS_DIR)/tests	
-=======
 	@mkdir -p $(OBJS_DIR)/tests
 # mp_traversal specific
 	@mkdir -p $(OBJS_DIR)/imageTraversal
@@ -70,7 +54,6 @@ $(OBJS_DIR):
 # mp_mosaic specific
 	@mkdir -p $(OBJS_DIR)/cs225/ColorSpace
 	@mkdir -p $(OBJS_DIR)/util
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Rules for compiling source code.
 # - Every object file is required by $(EXE)
@@ -82,22 +65,13 @@ $(OBJS_DIR)/%.o: %.cpp | $(OBJS_DIR)
 # Rules for compiling test suite.
 # - Grab every .cpp file in tests/, compile them to .o files
 # - Build the test program w/ catchmain.cpp from cs225
-<<<<<<< HEAD
-OBJS_TEST = $(filter-out $(EXE_OBJ), $(OBJS))
-=======
 OBJS_TEST += $(filter-out $(EXE_OBJ), $(OBJS))
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 CPP_TEST = $(wildcard tests/*.cpp)
 CPP_TEST += cs225/catch/catchmain.cpp
 OBJS_TEST += $(CPP_TEST:.cpp=.o)
 
-<<<<<<< HEAD
-$(TEST): $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
-	$(LD) $^ $(LDFLAGS) -o $@
-=======
 $(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Additional dependencies for object files are included in the clang++
 # generated .d files (from $(DEPFILE_FLAGS)):
@@ -107,8 +81,6 @@ $(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
 -include $(OBJS_DIR)/cs225/lodepng/*.d
 -include $(OBJS_DIR)/tests/*.d
 
-<<<<<<< HEAD
-=======
 # Custom Clang version enforcement Makefile rule:
 ccred=$(shell echo -e "\033[0;31m")
 ccyellow=$(shell echo -e "\033[0;33m")
@@ -127,7 +99,6 @@ endif
 endif
 
 output_msg: ; $(CLANG_VERSION_MSG)
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
 
 # Standard C++ Makefile rules:
 clean:
@@ -136,8 +107,4 @@ clean:
 tidy: clean
 	rm -rf doc
 
-<<<<<<< HEAD
-.PHONY: all tidy clean
-=======
 .PHONY: all tidy clean output_msg
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce

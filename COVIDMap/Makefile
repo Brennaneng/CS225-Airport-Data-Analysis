@@ -1,4 +1,4 @@
-CC = gcc
+CC = g++
 CFLAGS = -Wall -g
 
 COVIDMap: main.o ReadFile.o
@@ -15,3 +15,4 @@ clean:
 
 # Use the cs225 makefile template:
 include cs225/make/cs225.mk
+
