@@ -24,23 +24,31 @@ class Map{
 
     vector<pair<int,int>> printRoutes();
 
-    string getValue(int key);
+    // string getValue(int key);
 
     void insertStates();
 
     
     private:
 
-    vector<pair<bool,string>> allAirports_;
+    struct AirPortNode{
+        bool exists;
+        string name;
+        double x;
+        double y;
 
-    vector<pair<int,int>> routes_;
+        AirPortNode(const bool& exists_, const string& name_,const double& x_, const double& y_) : exists(exists_), name(name_),x(x_),y(y_)
+        {}
+        AirPortNode() : exists(NULL), name("n/a"), x(0), y(0)
+        {}
 
+    };
 
-    struct Node {
+    struct MapNode {
         int key;
         string value;
         int currentWeight;
-        vector<Node*> nodes;
+        vector<MapNode*> nodes;
 
         /**
          * Node constructor; sets children to point to `NULL`.
@@ -48,12 +56,17 @@ class Map{
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        Node(const int& newKey, const string& newValue)
+        MapNode(const int& newKey, const string& newValue)
             : key(newKey), value(newValue), currentWeight(-1)
         {
         }
     };
-    AVLTree<int,string> * _tree;
+
+    vector<AirPortNode> allAirports_;
+
+    vector<pair<int,int>> routes_;
+
+    AVLTree<int,vector<vector<double>>> * _tree;
 
     vector<string> * States; 
 

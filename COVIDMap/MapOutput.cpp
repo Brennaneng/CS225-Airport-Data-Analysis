@@ -21,32 +21,40 @@
 
 //One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
 Map::Map(){
-    //insertStates();
     allAirports_.resize(14111);
-    for (unsigned i = 0; i < allAirports_.size(); i++)
-        allAirports_[i] = make_pair(false, "n/a");
-    AVLTree<int,string> * tree = new AVLTree<int,string>();
-    // for(int i = 0; i < 50; i++){
-    //     //vector<int> * empty = new vector<int>;
-    //     vector<int> empty;
-    //     empty.resize(15);
-    //     string currState = States->at(i);;
-    //     tree->insert(currState, empty);
-    // }
+    for (unsigned i = 0; i < allAirports_.size(); i++){
+        allAirports_[i].exists = false;
+        allAirports_[i].name = "n/a";
+        allAirports_[i].x = 0;
+        allAirports_[i].y = 0;
+    }
+    AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
     _tree = tree;
 };
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     allAirports_.resize(14111);
-    for (unsigned i = 0; i < allAirports_.size(); i++)
-        allAirports_[i] = make_pair(false, "n/a");
-    AVLTree<int,string> * tree = new AVLTree<int,string>();
+    for (unsigned i = 0; i < allAirports_.size(); i++){
+        allAirports_[i].exists = false;
+        allAirports_[i].name = "n/a";
+        allAirports_[i].x = 0;
+        allAirports_[i].y = 0;
+    }
+    AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
     _tree = tree;
 
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
         int ID = stoi(file[i][0]);
         //pair<bool,string> curr = allAirports_[ID];
-        allAirports_[ID] = make_pair(true,file[i][1]);
+        allAirports_[ID].exists = true;
+        allAirports_[ID].name = file[i][1];
+        allAirports_[ID].x = stod(file[i][3]);
+        allAirports_[ID].y = stod(file[i][4]);
+        vector<vector<double>> toInsert (4);
+        toInsert[0].push_back(allAirports_[ID].x);
+        toInsert[1].push_back(allAirports_[ID].y);
+        _tree->insert(ID, toInsert);
+
         //_tree->insert(ID,allAirports_[ID].second);
 
 
@@ -71,7 +79,10 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     //this sets up our AVL Tree
     for(int i = 0; i < routes_.size(); i++){
         pair<int,int> curr = routes_[i];
+        vector<vector<double>> firstValue = _tree->find(curr.first);
+        vector<vector<double>> secondValue = _tree->find(curr.second);
         
+
 
 
 
@@ -81,7 +92,7 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
 
 void Map::readRoutes(vector<pair<int,int>> file){
 for(unsigned i = 0; i < file.size(); i++){
-    if(allAirports_[file[i].first].first && allAirports_[file[i].second].first){
+    if(allAirports_[file[i].first].exists && allAirports_[file[i].second].exists){
         routes_.push_back(make_pair(file[i].first,file[i].second));
         }
     }
@@ -91,9 +102,9 @@ vector<int> Map::printTree(){
     return _tree->getInorderTraversal();
 };
 
-string Map::getValue(int key){
-    return _tree->find(key);
-}
+// string Map::getValue(int key){
+//     return _tree->find(key);
+// }
 
 vector<pair<int,int>> Map::printRoutes(){
     return routes_;
