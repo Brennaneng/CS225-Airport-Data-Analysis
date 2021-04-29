@@ -21,36 +21,82 @@
 
 //One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
 Map::Map(){
-    insertStates();
-    AVLTree<string,vector<int>> * tree = new AVLTree<string,vector<int> >();
-    for(int i = 0; i < 50; i++){
-        //vector<int> * empty = new vector<int>;
-        vector<int> empty;
-        empty.resize(15);
-        string currState = States->at(i);;
-        tree->insert(currState, empty);
-    }
+    //insertStates();
+    allAirports_.resize(14111);
+    for (unsigned i = 0; i < allAirports_.size(); i++)
+        allAirports_[i] = make_pair(false, "n/a");
+    AVLTree<int,string> * tree = new AVLTree<int,string>();
+    // for(int i = 0; i < 50; i++){
+    //     //vector<int> * empty = new vector<int>;
+    //     vector<int> empty;
+    //     empty.resize(15);
+    //     string currState = States->at(i);;
+    //     tree->insert(currState, empty);
+    // }
     _tree = tree;
 };
-Map::Map(vector<vector<string>> file){
-    Map();
+Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
+    allAirports_.resize(14111);
+    for (unsigned i = 0; i < allAirports_.size(); i++)
+        allAirports_[i] = make_pair(false, "n/a");
+    AVLTree<int,string> * tree = new AVLTree<int,string>();
+    _tree = tree;
+
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
-        //Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
-        vector<string> curr_line = file[i];
-        string curr_state = curr_line[1];
-        string curr_deaths = curr_line[2];
-        int curr_deaths_int = stoi(curr_deaths);
-        //since the date in the data is given like (3/15/2021) we need to access the month and the year so we put it in a vector and return that vector.
-        vector<string> curr_date = {"2020","2020"};//read_date(curr_line[0]);
-        string cur_month = curr_date[0];
-        string cur_year = curr_date[2];
-        int idx = 1;//returnDateIndex(cur_month, cur_year);
-        vector<int> nodeData = _tree->find(curr_state);
-        nodeData[idx] = curr_deaths_int;
-        _tree->replace(curr_state,nodeData);
+        int ID = stoi(file[i][0]);
+        //pair<bool,string> curr = allAirports_[ID];
+        allAirports_[ID] = make_pair(true,file[i][1]);
+        //_tree->insert(ID,allAirports_[ID].second);
+
+
+
+
+        // //Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
+        // vector<string> curr_line = file[i];
+        // string curr_state = curr_line[1];
+        // string curr_deaths = curr_line[2];
+        // int curr_deaths_int = stoi(curr_deaths);
+        // //since the date in the data is given like (3/15/2021) we need to access the month and the year so we put it in a vector and return that vector.
+        // vector<string> curr_date = {"2020","2020"};//read_date(curr_line[0]);
+        // string cur_month = curr_date[0];
+        // string cur_year = curr_date[2];
+        // int idx = 1;//returnDateIndex(cur_month, cur_year);
+        // vector<int> nodeData = _tree->find(curr_state);
+        // nodeData[idx] = curr_deaths_int;
+        // _tree->replace(curr_state,nodeData);
+    }
+    readRoutes(routeFile);
+
+    //this sets up our AVL Tree
+    for(int i = 0; i < routes_.size(); i++){
+        pair<int,int> curr = routes_[i];
+        
+
+
+
     }
 
+};
+
+void Map::readRoutes(vector<pair<int,int>> file){
+for(unsigned i = 0; i < file.size(); i++){
+    if(allAirports_[file[i].first].first && allAirports_[file[i].second].first){
+        routes_.push_back(make_pair(file[i].first,file[i].second));
+        }
+    }
+};
+
+vector<int> Map::printTree(){
+    return _tree->getInorderTraversal();
+};
+
+string Map::getValue(int key){
+    return _tree->find(key);
+}
+
+vector<pair<int,int>> Map::printRoutes(){
+    return routes_;
 };
 // Map::generateMap(Node* start_){
 
