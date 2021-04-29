@@ -35,4 +35,8 @@
     We decided we no longer want to pursue the animate function and we decided we wanted to use the data structure to map out the line of shortest
     path between two epicenters through our coordinates.
     * Brennan finished ReadFile and is working on paths.cpp to find shortest path of 2 COVID epicenters
+
+1. **Log for 4/29/2021**
+    As of today, our group decided on a concensus that we longer want to pursue our COVID map idea because it lacked the complexity in order to fulfill the requirements for this final project. We will resort to another proposal idea that has been updated in PROPOSAL.md
+
     
