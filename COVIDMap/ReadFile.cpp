@@ -92,16 +92,16 @@ vector<string> read_date(string full_date) {
     return dates;
 };
 int returnDateIndex(string month, string year){
-    int x = std::stoi(month); 
-    --x;
-    if(year == "2020"){
-        return x;
-    }
-    else{
-    x = x + 12;
+int x = stoi(month); 
+--x;
+if(year == "2020"){
     return x;
-    }
-    return -1;
+}
+else{
+x = x + 12;
+return x;
+}
+return -1;
 }
 void clean_data() {
     
