@@ -8,7 +8,7 @@
 using namespace std;
 using namespace functions;
 
-int main(){
+int main() {
 
     /*cout<< "hello world" << endl;
     AVLTree<int, int> tree;
@@ -19,33 +19,20 @@ int main(){
     solnTraversal.push_back(4);
     solnTraversal.push_back(1);
     solnTraversal.push_back(5);
-<<<<<<< HEAD
-    vector<string> solnFuncCalls;
-    solnFuncCalls.push_back("rotateLeft");
-
-    vector<vector<string> >  dataVector = read_file();
-    for(int i = 0; i < 30; i++){
-        for(int j =0; j < 3; j++){
-            cout<<dataVector[i][j] <<endl;
-        }
-    }
-    Map currMap;
-    
-
-=======
     std::vector<string> solnFuncCalls;
     solnFuncCalls.push_back("rotateLeft");*/
     //
-
-    vector<vector<string> >  dataVector = functions::read_file();
-    for(unsigned int i = 0; i < dataVector.size(); i++){
-        for(unsigned int j = 0; j < dataVector[0].size(); j++){
-            cout<<dataVector[i][j] <<" ";
-        }
-    }
-    if ((dataVector.back()).back() == "/n") {
-        cout<< (dataVector.back()).back()<< "ok" << endl;
-    } 
->>>>>>> refs/remotes/origin/master
+    // CSV reading;
+    // vector<vector<string> >  dataVector = reading.read_file();
+    // for(unsigned int i = 0; i < dataVector.size(); i++){
+    //     for(unsigned int j = 0; j < dataVector[0].size(); j++){
+    //         cout<<dataVector[i][j] <<" ";
+    //     }
+    // }
+    // if ((dataVector.back()).back() == "/n") {
+    //     cout<< (dataVector.back()).back()<< "ok" << endl;
+    // } 
+    cout<< "hello" <<endl;
+    vector<int> hi {111,111};
     return 0;
 }

@@ -1,6 +1,7 @@
  #include "ReadFile.h"
 
 namespace functions {
+
 vector<vector<string>> read_file() {
     //creating file pointer
     ifstream file;
@@ -25,7 +26,7 @@ vector<vector<string>> read_file() {
     }
     cout<<"Done"<<endl;
     return TotalFile;
-}
+};
 
 vector<string> read_date(string full_date) {
     std::istringstream ss(full_date);
@@ -36,7 +37,7 @@ vector<string> read_date(string full_date) {
     }
 
     return dates;
-}
+};
 int returnDateIndex(string month, string year){
 int x = stoi(month); 
 --x;
@@ -51,5 +52,5 @@ return -1;
 }
 void clean_data() {
     
-}
+};
 }

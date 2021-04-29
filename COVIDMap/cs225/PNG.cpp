@@ -68,12 +68,6 @@ namespace cs225 {
     if (width_ != other.width_) { return false; }
     if (height_ != other.height_) { return false; }
 
-<<<<<<< HEAD
-    for (unsigned i = 0; i < width_ * height_; i++) {
-      HSLAPixel & p1 = imageData_[i];
-      HSLAPixel & p2 = other.imageData_[i];
-      if (p1 != p2) { return false; }
-=======
     hslaColor hslaSpace1;
     hslaColor hslaSpace2;
     rgbaColor rgbaSpace1;
@@ -89,7 +83,6 @@ namespace cs225 {
           || rgbaSpace1.g != rgbaSpace2.g
           || rgbaSpace1.b != rgbaSpace2.b
           || rgbaSpace1.a != rgbaSpace2.a) { return false; }
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
     }
 
     return true;
@@ -99,11 +92,7 @@ namespace cs225 {
     return !(*this == other);
   }
 
-<<<<<<< HEAD
-  HSLAPixel & PNG::getPixel(unsigned int x, unsigned int y) const {
-=======
   HSLAPixel & PNG::_getPixelHelper(unsigned int x, unsigned int y) const {
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
     if (width_ == 0 || height_ == 0) {
       cerr << "ERROR: Call to cs225::PNG::getPixel() made on an image with no pixels." << endl;
       assert(width_ > 0);
@@ -128,13 +117,10 @@ namespace cs225 {
     return imageData_[index];
   }
 
-<<<<<<< HEAD
-=======
   HSLAPixel & PNG::getPixel(unsigned int x, unsigned int y) { return _getPixelHelper(x,y); }
 
   const HSLAPixel & PNG::getPixel(unsigned int x, unsigned int y) const { return _getPixelHelper(x,y); }
 
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
   bool PNG::readFromFile(string const & fileName) {
     vector<unsigned char> byteData;
     unsigned error = lodepng::decode(byteData, width_, height_, fileName);
@@ -231,11 +217,7 @@ namespace cs225 {
 
     for (unsigned x = 0; x < png.width(); x++) {
       for (unsigned y = 0; y < png.height(); y++) {
-<<<<<<< HEAD
-        HSLAPixel &pixel = png.getPixel(x, y);
-=======
         const HSLAPixel &pixel = png.getPixel(x, y);
->>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
         hash ^= hashFunction(pixel.h);
         hash ^= hashFunction(pixel.s);
         hash ^= hashFunction(pixel.l);
