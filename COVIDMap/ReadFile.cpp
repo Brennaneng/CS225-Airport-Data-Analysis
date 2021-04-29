@@ -1,13 +1,7 @@
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
  #include "ReadFile.h"
-using namespace std;
 
 namespace functions {
-vector<vector<string> > read_file() {
+vector<vector<string>> read_file() {
     //creating file pointer
     ifstream file;
 
@@ -43,5 +37,17 @@ vector<string> read_date(string full_date) {
     }
 
     return dates;
+}
+int returnDateIndex(string month, string year){
+int x = stoi(month); 
+--x;
+if(year == "2020"){
+    return x;
+}
+else{
+x = x + 12;
+return x;
+}
+return -1;
 }
 }

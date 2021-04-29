@@ -12,7 +12,11 @@ namespace cs225 {
     double a;  // [0, 1]
   } hslaColor;
 
+<<<<<<< HEAD
+  static hslaColor rgb2hsl(rgbaColor rgb) {
+=======
   static hslaColor rgb2hsl(const rgbaColor & rgb) {
+>>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
     hslaColor hsl;
     double r, g, b, min, max, chroma;
 
@@ -64,7 +68,11 @@ namespace cs225 {
     return hsl;
   };
 
+<<<<<<< HEAD
+  static rgbaColor hsl2rgb(hslaColor hsl) {
+=======
   static rgbaColor hsl2rgb(const hslaColor & hsl) {
+>>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce
     rgbaColor rgb;
 
     // HSV Calculations -- formulas sourced from https://en.wikipedia.org/wiki/HSL_and_HSV
@@ -92,4 +100,8 @@ namespace cs225 {
     rgb.a = round(hsl.a * 255);
     return rgb;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 98177057c5d2a161aabcf122f4b528a7bad167ce

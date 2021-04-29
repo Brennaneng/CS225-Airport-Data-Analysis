@@ -105,7 +105,7 @@ void AVLTree<K, V>::rebalance(Node*& subtree)
 }
 
 template <class K, class V>
-void AVLTree<K, V>::insert(const K & key, const V & value)
+void AVLTree<K, V>::insert(const K& key, const V& value)
 {
     insert(root, key, value);
 }
