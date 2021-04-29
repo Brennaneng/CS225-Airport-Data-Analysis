@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -Wall -g 
 
-COVIDMap: main.o 
-	$(CC) $(CFLAGS) -o COVIDMap main.o 
+COVIDMap: main.o ReadFile.o MapOutput.o
+	$(CC) $(CFLAGS) -o COVIDMap main.o ReadFile.o MapOutput.o
 
 main.o: main.cpp 
 	$(CC) $(CFLAGS) -std=c++11 -c main.cpp
