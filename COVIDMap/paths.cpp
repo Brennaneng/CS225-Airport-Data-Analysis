@@ -6,3 +6,53 @@
 #include <vector>
 using namespace std;
 
+vector<pair<int,int>> paths::coords(){
+    vector<pair<int,int>> statecoords;
+    statecoords.push_back(pair<int,int>(651,410));  //AL
+    statecoords.push_back(pair<int,int>(543,375));  //AR
+    statecoords.push_back(pair<int,int>(198,360));  //AZ
+    statecoords.push_back(pair<int,int>(69,282));   //CA
+    statecoords.push_back(pair<int,int>(316,271));  //CO
+    statecoords.push_back(pair<int,int>(858,178));  //CT
+    statecoords.push_back(pair<int,int>(826,247));  //DE
+    statecoords.push_back(pair<int,int>(760,498));  //FL
+    statecoords.push_back(pair<int,int>(715,408));  //GA
+    statecoords.push_back(pair<int,int>(518,211));  //IA
+    statecoords.push_back(pair<int,int>(192,142));  //ID
+    statecoords.push_back(pair<int,int>(594,255));  //IL
+    statecoords.push_back(pair<int,int>(442,289));  //KS
+    statecoords.push_back(pair<int,int>(666,305));  //KY
+    statecoords.push_back(pair<int,int>(550,464));  //LA
+    statecoords.push_back(pair<int,int>(868,156));  //MA
+    statecoords.push_back(pair<int,int>(802,243));  //MD
+    statecoords.push_back(pair<int,int>(892,80));   //ME
+    statecoords.push_back(pair<int,int>(615,117));  //MI
+    statecoords.push_back(pair<int,int>(538,297));  //MO
+    statecoords.push_back(pair<int,int>(596,417));  //MS
+    statecoords.push_back(pair<int,int>(273,84));   //MT
+    statecoords.push_back(pair<int,int>(782,332));  //NC
+    statecoords.push_back(pair<int,int>(412,96));   //ND
+    statecoords.push_back(pair<int,int>(420,223));  //NE
+    statecoords.push_back(pair<int,int>(864,128));  //NH
+    statecoords.push_back(pair<int,int>(837,215));  //NJ
+    statecoords.push_back(pair<int,int>(299,373));  //NM
+    statecoords.push_back(pair<int,int>(127,231));  //NV
+    statecoords.push_back(pair<int,int>(805,157));  //NY
+    statecoords.push_back(pair<int,int>(702,241));  //OH
+    statecoords.push_back(pair<int,int>(458,364));  //OK
+    statecoords.push_back(pair<int,int>(92,123));   //OR
+    statecoords.push_back(pair<int,int>(782,213));  //PA
+    statecoords.push_back(pair<int,int>(877,171));  //RI
+    statecoords.push_back(pair<int,int>(756,375));  //SC
+    statecoords.push_back(pair<int,int>(413,159));  //SD
+    statecoords.push_back(pair<int,int>(649,341));  //TN
+    statecoords.push_back(pair<int,int>(426,448));  //TX
+    statecoords.push_back(pair<int,int>(220,258));  //UT
+    statecoords.push_back(pair<int,int>(783,285));  //VA
+    statecoords.push_back(pair<int,int>(846,126));  //VT
+    statecoords.push_back(pair<int,int>(117,53));   //WA
+    statecoords.push_back(pair<int,int>(578,156));  //WI
+    statecoords.push_back(pair<int,int>(738,272));  //WV
+    statecoords.push_back(pair<int,int>(290,183));  //WY
+}
+
