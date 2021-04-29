@@ -36,7 +36,7 @@ Map::Map(vector<vector<string>> file){
     Map();
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
-        Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
+        //Accesses the data from one line which is in a vector (e.g <3/15/2021,GA,299>)
         vector<string> curr_line = file[i];
         string curr_state = curr_line[1];
         string curr_deaths = curr_line[2];

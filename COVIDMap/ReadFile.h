@@ -25,4 +25,9 @@ int returnDateIndex(string month, string year);
 * Cleans the data field by remoing rows that have any empty cells.
 */
 void clean_data();
+/**
+* Creates vector of pairs that have the routes.
+* Source airport ID,Destination airport ID
+*/
+vector<pair<int,int> > read_routes();
 }
