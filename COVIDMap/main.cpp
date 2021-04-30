@@ -52,10 +52,36 @@ int main() {
         // temp = tree.find(1);
         // cout<<temp.exists<< " "<<temp.name<<" "<<temp.x<<" "<<temp.y<<endl;
 
+        //presenting demo BFS
+        Map demo;
+        demo.democreateMap();
+        
+    //set up for next part
+        // vector<vector<string>> file = read_file();
+        // vector<pair<int,int>> routeFile = read_routes();
+        // Map airports(file, routeFile);
+
+        // vector<pair<int,string>> airportsToPrint = airports.printAirports();
+        // vector<pair<int,int>> routesUsed = airports.printRoutes();
+
+    //presenting all airports being used in our project
+    // for(unsigned i = 0; i < airportsToPrint.size(); i++){
+    //     pair<int,string> curr = airportsToPrint[i];
+    //     cout<<"Airport ID: "<<curr.first<<" is associated with the airport "<<curr.second<<endl;
+    // }
+
+    //presenting the routes between all the airports we analyze
+    // for(unsigned i = 0; i < routesUsed.size(); i++){
+    //     pair<int,int> curr = routesUsed[i];
+    //     cout<<"Airport ID: "<<curr.first<<" points to Airport ID: "<<curr.second<<endl;
+    // }
 
 
-        string test = "hello" + " world " + " ! ";
-        cout<<test<<endl;
+
+
+
+        // string test = "hello" + " world " + " ! ";
+        // cout<<test<<endl;
         
 
 
