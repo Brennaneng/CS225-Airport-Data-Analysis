@@ -24,7 +24,8 @@ class Map{
     void readRoutes(vector<pair<int,int>> file);
 
     vector<pair<int,int>> printRoutes();
-
+    double toRadians(const double degree);
+    double Eulerpath(double lat1, double long1, double lat2, double long2);
     // string getValue(int key);
 
     void insertStates();
