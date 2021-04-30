@@ -19,25 +19,6 @@ class Map{
     Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
 
-    vector<int> printTree();
-
-    void readRoutes(vector<pair<int,int>> file);
-
-    vector<pair<int,int>> printRoutes();
-    double toRadians(const double degree);
-    double Eulerpath(double lat1, double long1, double lat2, double long2);
-    // string getValue(int key);
-
-    void insertStates();
-    //must generate map before conducting BFSPath
-    void generateMap(int startID);
-
-    vector<int> BFSPath(int finalID);
-
-    double EulerPath(double x1, double x2, double y1, double y2);
-    
-    private:
-
     struct MapNode {
         int key;
         string value;
@@ -57,8 +38,32 @@ class Map{
         }
     };
 
+    vector<int> printTree();
+
+    void readRoutes(vector<pair<int,int>> file);
+
+    vector<pair<int,int>> printRoutes();
+    double toRadians(const double degree);
+    double Eulerpath(double lat1, double long1, double lat2, double long2);
+    // string getValue(int key);
+
+    void insertStates();
+    //must generate map before conducting BFSPath
+    string generateMap(int startID);
+
+    vector<int> BFSPath(int finalID);
+
+    double EulerPath(double x1, double x2, double y1, double y2);
+
+    int returnNode(int ID);
+    
+    private:
+
+    
+
     struct AirPortNode{
         bool exists;
+        int key;
         string name;
         double x;
         double y;
@@ -66,20 +71,23 @@ class Map{
         vector<int> destinationIDs;
         vector<double> distances;
 
-        AirPortNode(const bool& exists_, const string& name_,const double& x_, const double& y_) : exists(exists_), name(name_),x(x_),y(y_),thisPtr(NULL)
+        AirPortNode(const bool& exists_, const int& key_, const string& name_,const double& x_, const double& y_) : 
+        exists(exists_),key(key_), name(name_),x(x_),y(y_),thisPtr(NULL)
         {}
-        AirPortNode() : exists(NULL), name("n/a"), x(0), y(0), thisPtr(NULL)
+        AirPortNode() : exists(false),key(0), name("n/a"), x(0), y(0), thisPtr(NULL)
         {}
 
     };
 
+    int binarySearch(const vector<AirPortNode>& elements, int start, int end, const int& val);
     
-
     vector<int> hasVisited_;
 
     MapNode * mapStartNode_;
 
     vector<AirPortNode> allAirports_;
+
+    vector<AirPortNode> usedAirports_;
 
     vector<pair<int,int>> routes_;
 

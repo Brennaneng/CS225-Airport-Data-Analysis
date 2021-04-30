@@ -19,6 +19,8 @@ vector<pair<int,int> > read_routes()  {
     //counter to determine place in airport
     int counter = 0;
     //reads while the file still has values to be read
+    int i = 0;
+    //while(file.good() && i < 3255){
     while(file.good()){
         while(getline(file,line) ) {
             stringstream ss(line);
@@ -38,6 +40,7 @@ vector<pair<int,int> > read_routes()  {
             datapair.first = 0;
             datapair.second = 0;
         }    
+        i++;
     }
     return TotalFile;
 }
@@ -53,7 +56,10 @@ vector<vector<string>> read_file() {
     vector<vector<string> > TotalFile;
     vector<string> line;
     //reads while the file still has values to be read
+    int i = 0;
     while(file.good()){
+        // if(i == 50)
+        // break;
         //creates a temporary string called line to take each 
         string datapoint;
         while(getline(file,datapoint)){
@@ -65,6 +71,7 @@ vector<vector<string>> read_file() {
                 TotalFile.push_back(line);
             }
             line.clear();
+            
         }
         // for(int count = 0; count < 5; count++){
         //     std::getline(file, datapoint, ',');
@@ -74,6 +81,8 @@ vector<vector<string>> read_file() {
         //     TotalFile.push_back(line);
         // }
         // line.clear();
+        i++;
+
     }
 
 

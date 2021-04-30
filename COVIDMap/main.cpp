@@ -21,6 +21,24 @@ using namespace functions;
 //         {}
 
 //     };
+struct MapNode {
+        int key;
+        string value;
+        int currentWeight;
+        vector<MapNode*> nodes;
+        MapNode* prev;
+
+        /**
+         * Node constructor; sets children to point to `NULL`.
+         * @param newKey The object to use as a key
+         * @param newValue The templated data element that the constructed
+         *  node will hold.
+         */
+        MapNode(const int& newKey, const string& newValue)
+            : key(newKey), value(newValue), currentWeight(-1)
+        {
+        }
+    };
 
 int main() {
         // AirPortNode curr(true,"airport", 120, 1221);
@@ -46,7 +64,11 @@ int main() {
     vector<vector<string>> file = read_file();
     vector<pair<int,int>> routeFile = read_routes();
     Map test(file, routeFile);
-    test.generateMap(3214);
+
+   int temp = test.returnNode(3214);
+    cout<< temp <<endl;
+
+    cout<< test.generateMap(3411)<<endl;
     // vector<int> print = test.printTree();
     // for(unsigned i = 0; i < print.size(); i++){
     //     cout<< print[i] << " " << file[i][1] <<endl;

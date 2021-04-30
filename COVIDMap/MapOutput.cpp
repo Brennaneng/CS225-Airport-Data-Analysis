@@ -35,27 +35,31 @@ Map::Map(){
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     mapStartNode_ = NULL;
     allAirports_.resize(14111);
+    usedAirports_.clear();
     for (unsigned i = 0; i < allAirports_.size(); i++){
         allAirports_[i].exists = false;
         allAirports_[i].name = "n/a";
         allAirports_[i].x = 0;
         allAirports_[i].y = 0;
+        allAirports_[i].key = 0;
     }
-    AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
-    _tree = tree;
+    // AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
+    // _tree = tree;
 
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
         int ID = stoi(file[i][0]);
-        //pair<bool,string> curr = allAirports_[ID];
+        // AirPortNode curr (true, ID,file[i][1], stod(file[i][3]), stod(file[i][4]) );
+        // usedAirports_.push_back(curr);
         allAirports_[ID].exists = true;
         allAirports_[ID].name = file[i][1];
         allAirports_[ID].x = stod(file[i][3]);
         allAirports_[ID].y = stod(file[i][4]);
-        vector<vector<double>> toInsert (4);
-        toInsert[0].push_back(allAirports_[ID].x);
-        toInsert[1].push_back(allAirports_[ID].y);
-        _tree->insert(ID, toInsert);
+        allAirports_[ID].key = ID;
+        // vector<vector<double>> toInsert (4);
+        // toInsert[0].push_back(allAirports_[ID].x);
+        // toInsert[1].push_back(allAirports_[ID].y);
+        // _tree->insert(ID, toInsert);
 
         //_tree->insert(ID,allAirports_[ID].second);
 
@@ -81,55 +85,89 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     //this sets up our AVL Tree
     for(unsigned i = 0; i < routes_.size(); i++){
         pair<int,int> curr = routes_[i];
-        vector<vector<double>> firstValue = _tree->find(curr.first);
-        vector<vector<double>> secondValue = _tree->find(curr.second);
-        double x1 = firstValue[0][0];
-        double x2 = firstValue[1][0];
-        double y1 = secondValue[0][0];
-        double y2 = secondValue[1][0];
-        firstValue[2].push_back(curr.second);
-        firstValue[3].push_back(EulerPath(x1,x2,y1,y2));
-        allAirports_[curr.first].destinationIDs.push_back(curr.second);
+        // int idx = binarySearch(usedAirports_, curr.first, 0, usedAirports_.size());
+        // AirPortNode & currNode = usedAirports_[idx];
+        // vector<vector<double>> firstValue = _tree->find(curr.first);
+        // vector<vector<double>> secondValue = _tree->find(curr.second);
+
+        double x1 = allAirports_[curr.first].x;
+        double x2 = allAirports_[curr.first].y;
+        double y1 = allAirports_[curr.second].x;
+        double y2 = allAirports_[curr.second].y;
+        // firstValue[2].push_back(curr.second);
+        // firstValue[3].push_back(EulerPath(x1,x2,y1,y2));
+        //currNode.destinationIDs.push_back(curr.second);
+        //allAirports_[curr.first].destinationIDs.push_back(curr.second);
         allAirports_[curr.first].distances.push_back(EulerPath(x1,x2,y1,y2));
-        _tree->replace(curr.first, firstValue);
+        //_tree->replace(curr.first, firstValue);
     }
+    cout<<"Size of used airports is "<<usedAirports_.size()<<endl;
+    cout<<"Size of allAirports is "<<allAirports_.size()<<endl;
+
+    for(unsigned i = 0; i < allAirports_.size(); i++){
+        if(allAirports_[i].exists){
+            usedAirports_.push_back(allAirports_[i]);
+            cout<<"Number of connections: "<<allAirports_[i].destinationIDs.size()<<endl;
+        }
+    }
+    allAirports_.clear();
+
+    cout<<"Size of used airports is "<<usedAirports_.size()<<endl;
 
 };
 
-void Map::generateMap(int startID){
+int Map::returnNode(int ID){
+    int idx = binarySearch(usedAirports_,0,usedAirports_.size()-1, ID);
+    if(idx==-1)
+        return -1;
+    MapNode * value = new MapNode(ID, usedAirports_[idx].name);
+    return value->key;
+}
+
+string Map::generateMap(int startID){
     // allAirports_[startID].thisPtr = new MapNode(startID, allAirports_[startID].name);
     // mapStartNode_ = allAirports_[startID].thisPtr;
+    int startIdx = binarySearch(usedAirports_, 0,usedAirports_.size()-1, startID);
+    if(startIdx == -1)
+        return "Cannot generate a map with this ID";
+    hasVisited_.resize(usedAirports_.size());
 
-    hasVisited_.resize(14111);
-    for(unsigned i = 0; i < allAirports_.size(); i++){
-        if(allAirports_[i].exists){
-            allAirports_[i].thisPtr = new MapNode(i, allAirports_[i].name);
-        }
+    // for(unsigned i = 0; i < allAirports_.size(); i++){
+    //     if(allAirports_[i].exists){
+    //         allAirports_[i].thisPtr = new MapNode(i, allAirports_[i].name);
+    //     }
+    //     hasVisited_[i] = false;
+    // }
+    for(unsigned i = 0; i < usedAirports_.size(); i++){
+        int currKey = usedAirports_[i].key;
+        string currName = usedAirports_[i].name;
+        usedAirports_[i].thisPtr = new MapNode(currKey, currName);
         hasVisited_[i] = false;
     }
 
-    mapStartNode_ = allAirports_[startID].thisPtr;
-    MapNode *& mapStartNode = mapStartNode_;
+    mapStartNode_ = usedAirports_[startIdx].thisPtr;
 
     while(!createMapNodes.empty())
         createMapNodes.pop();
     
-    createMapNodes.push(mapStartNode);
+    createMapNodes.push(mapStartNode_);
     while(!createMapNodes.empty()){
-        MapNode *& currMapNode = createMapNodes.front();
+        MapNode * currMapNode = createMapNodes.front();
         int currKey = currMapNode->key;
+        int currIdx = binarySearch(usedAirports_, 0,usedAirports_.size()-1, currKey);
         createMapNodes.pop();
 
-    for(unsigned i = 0; i < allAirports_[currKey].destinationIDs.size(); i++){
-        int nextID = allAirports_[currKey].destinationIDs[i];
-        MapNode * nextNode = allAirports_[nextID].thisPtr;
-        if(hasVisited_[nextID])
+    for(unsigned i = 0; i < usedAirports_[currIdx].destinationIDs.size(); i++){
+        int nextID = usedAirports_[currIdx].destinationIDs[i];
+        int nextIndex = binarySearch(usedAirports_,0, usedAirports_.size()-1, nextID);
+        MapNode * nextNode = usedAirports_[nextIndex].thisPtr;
+        if(hasVisited_[nextIndex])
             continue;
         currMapNode->nodes.push_back(nextNode);
         createMapNodes.push(nextNode);
         }
     }
-
+return "Successfully generated a map";
 };
 
 vector<int> Map::BFSPath(int finalID){
@@ -140,8 +178,9 @@ vector<int> Map::BFSPath(int finalID){
 void Map::readRoutes(vector<pair<int,int>> file){
 for(unsigned i = 0; i < file.size(); i++){
     if(allAirports_[file[i].first].exists && allAirports_[file[i].second].exists){
-        routes_.push_back(make_pair(file[i].first,file[i].second));
-        allAirports_[file[i].first].destinationIDs.push_back(file[i].second);
+        if(allAirports_[file[i].first].destinationIDs.size() < 5)
+            allAirports_[file[i].first].destinationIDs.push_back(file[i].second);
+            routes_.push_back(make_pair(file[i].first,file[i].second));
         }
     }
 };
@@ -175,7 +214,7 @@ double Map::toRadians(const double degree)
 }
  
 double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
-{
+
     // Convert the latitudes
     // and longitudes
     // from degree to radians.
@@ -203,7 +242,29 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
     ans = ans * R;
  
     return ans;
-}
+};
+
+int Map::binarySearch(const vector<AirPortNode>& elements, int start, int end, const int& val){
+
+    int midPoint = (start + end)/2;
+
+    if(end - start == 0 && elements[midPoint].key != val){
+        return -1;
+    }
+    if(elements[midPoint].key == val){
+        return midPoint;
+    }
+    if(elements[midPoint].key < val){
+        return binarySearch(elements, midPoint+1, end, val);
+    }
+    else{
+        return binarySearch(elements, start, midPoint, val);
+    }
+    
+    //return -1;
+
+
+};
 
 
 
@@ -263,4 +324,3 @@ States = new vector<string> ({"AK",
 "WY"});
 }
 };*/
-}
