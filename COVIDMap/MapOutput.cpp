@@ -118,14 +118,6 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
 
 };
 
-int Map::returnNode(int ID){
-    int idx = binarySearch(usedAirports_,0,usedAirports_.size()-1, ID);
-    if(idx==-1)
-        return -1;
-    MapNode * value = new MapNode(ID, usedAirports_[idx].name);
-    return value->key;
-}
-
 string Map::generateMap(int startID){
     // allAirports_[startID].thisPtr = new MapNode(startID, allAirports_[startID].name);
     // mapStartNode_ = allAirports_[startID].thisPtr;
@@ -187,8 +179,9 @@ for(unsigned i = 0; i < file.size(); i++){
     }
 };
 
-vector<int> Map::printTree(){
-    return _tree->getInorderTraversal();
+vector<pair<int,int>> Map::printAirports(){
+    //return _tree->getInorderTraversal();
+    return routes_;
 };
 
 // string Map::getValue(int key){
@@ -199,6 +192,13 @@ vector<pair<int,int>> Map::printRoutes(){
     return routes_;
 };
 // Map::generateMap(Node* start_){
+int Map::returnNode(int ID){
+    int idx = binarySearch(usedAirports_,0,usedAirports_.size()-1, ID);
+    if(idx==-1)
+        return -1;
+    MapNode * value = new MapNode(ID, usedAirports_[idx].name);
+    return value->key;
+}
     
 double Map::EulerPath(double x1, double x2, double y1, double y2){
     return 0;

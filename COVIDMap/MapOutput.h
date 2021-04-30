@@ -16,29 +16,13 @@ using namespace std;
 
 class Map{
     public:
+    
     Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
+    
+    vector<int> printAirports();
 
-    struct MapNode {
-        int key;
-        string value;
-        int currentWeight;
-        vector<MapNode*> nodes;
-        MapNode* prev;
-
-        /**
-         * Node constructor; sets children to point to `NULL`.
-         * @param newKey The object to use as a key
-         * @param newValue The templated data element that the constructed
-         *  node will hold.
-         */
-        MapNode(const int& newKey, const string& newValue)
-            : key(newKey), value(newValue), currentWeight(-1)
-        {
-        }
-    };
-
-    vector<int> printTree();
+    vector<pair<int,int>> printRoutes();
 
     void readRoutes(vector<pair<int,int>> file);
 
@@ -59,6 +43,26 @@ class Map{
     
     private:
 
+    
+
+    struct MapNode {
+        int key;
+        string value;
+        int currentWeight;
+        vector<MapNode*> nodes;
+        MapNode* prev;
+
+        /**
+         * Node constructor; sets children to point to `NULL`.
+         * @param newKey The object to use as a key
+         * @param newValue The templated data element that the constructed
+         *  node will hold.
+         */
+        MapNode(const int& newKey, const string& newValue)
+            : key(newKey), value(newValue), currentWeight(-1)
+        {
+        }
+    };
     
 
     struct AirPortNode{

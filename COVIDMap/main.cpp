@@ -54,21 +54,22 @@ int main() {
 
 
 
+        string test = "hello" + " world " + " ! ";
+        cout<<test<<endl;
         
-        
 
 
 
 
 
-    vector<vector<string>> file = read_file();
-    vector<pair<int,int>> routeFile = read_routes();
-    Map test(file, routeFile);
+//     vector<vector<string>> file = read_file();
+//     vector<pair<int,int>> routeFile = read_routes();
+//     Map test(file, routeFile);
 
-   int temp = test.returnNode(3214);
-    cout<< temp <<endl;
+//    int temp = test.returnNode(3214);
+//     cout<< temp <<endl;
 
-    cout<< test.generateMap(3411)<<endl;
+//     cout<< test.generateMap(3411)<<endl;
     // vector<int> print = test.printTree();
     // for(unsigned i = 0; i < print.size(); i++){
     //     cout<< print[i] << " " << file[i][1] <<endl;
