@@ -10,6 +10,8 @@
 #include "TreeTraversals/PreorderTraversal.h"
 #include "TreeTraversals/InorderTraversal.h"
 #include <queue>
+#include <list>
+#include <algorithm>
 
 using namespace functions;
 using namespace std;
@@ -56,6 +58,9 @@ class Map{
     double EulerPath(double x1, double x2, double y1, double y2);
 
     int returnNode(int ID);
+    void democreateMap();
+    vector<string> demoBFS(vector<MapNode*> airports);
+    void addPath(int x, int y);
     
     private:
 
@@ -78,6 +83,8 @@ class Map{
         {}
 
     };
+
+    vector<MapNode*> airports;
 
     int binarySearch(const vector<AirPortNode>& elements, int start, int end, const int& val);
     

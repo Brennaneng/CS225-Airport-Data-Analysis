@@ -23,14 +23,14 @@
 Map::Map(){
     mapStartNode_ = NULL;
     allAirports_.resize(14111);
-    for (unsigned i = 0; i < allAirports_.size(); i++){
-        allAirports_[i].exists = false;
-        allAirports_[i].name = "n/a";
-        allAirports_[i].x = 0;
-        allAirports_[i].y = 0;
-    }
-    AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
-    _tree = tree;
+    // for (unsigned i = 0; i < allAirports_.size(); i++){
+    //     allAirports_[i].exists = false;
+    //     allAirports_[i].name = "n/a";
+    //     allAirports_[i].x = 0;
+    //     allAirports_[i].y = 0;
+    // }
+    // AVLTree<int,vector<vector<double>>> * tree = new AVLTree<int,vector<vector<double>>>();
+    // _tree = tree;
 };
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     mapStartNode_ = NULL;
@@ -268,6 +268,67 @@ int Map::binarySearch(const vector<AirPortNode>& elements, int start, int end, c
 
 };
 
+void Map::addPath(int x, int y){
+    airports[x]->nodes.push_back(airports[y]);
+}
+void Map::democreateMap(){
+    MapNode * ORD = new MapNode(0, "ORD");
+    MapNode * SFA = new MapNode(1, "SFA");
+    MapNode * JFK = new MapNode(2, "JFK");
+    MapNode * JAK = new MapNode(3, "JAK");
+    MapNode * FOO = new MapNode(4, "FOO");
+    airports.push_back(ORD);
+    airports.push_back(SFA);
+    airports.push_back(JFK);
+    airports.push_back(JAK); 
+    airports.push_back(FOO);
+    addPath(0, 3);
+    addPath(3, 2);
+    addPath(2, 1);
+    addPath(4, 0);
+    addPath(0, 4);
+    addPath(1, 4);
+    addPath(4, 3);
+
+    demoBFS(airports);
+
+
+}
+vector<string> Map::demoBFS(vector<MapNode*> airports){
+    bool *visited = new bool[airports.size()];
+    for(unsigned i = 0; i < airports.size(); i++){
+        visited[i] = false;
+    }
+    vector<string> returnPaths;
+    queue<MapNode*> Mapqueue;
+    Mapqueue.push(airports[0]);
+    while(!Mapqueue.empty()){
+        MapNode * curr = Mapqueue.front();
+        cout<<"Curr mapnode value is "<<curr->value<<endl;
+        visited[curr->key] = true;
+        Mapqueue.pop();
+
+        while(!Mapqueue.empty() && visited[curr->key]){
+            curr = Mapqueue.front();
+            Mapqueue.pop();
+        }
+
+        for(unsigned i = 0; i < curr->nodes.size(); i++){
+            MapNode* nextPotential = curr->nodes[i];
+            if(!visited[nextPotential->key]){
+                cout<<nextPotential->value<<" has a path to "<<curr->value<<endl;
+                Mapqueue.push(nextPotential);
+                nextPotential->prev = curr;
+                
+                // returnPaths.push_back()
+            }
+        }
+
+    }
+// reverse(returnPaths.begin(),returnPaths.end());
+returnPaths.push_back("finished BFS");
+return returnPaths;
+};
 
 
 // }
