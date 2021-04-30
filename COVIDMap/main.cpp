@@ -8,30 +8,33 @@
 using namespace std;
 using namespace functions;
 
-struct AirPortNode{
-        bool exists;
-        string name;
-        double x;
-        double y;
+// struct AirPortNode{
+//         bool exists;
+//         string name;
+//         double x;
+//         double y;
+//         AirPortNode thisPtr;
 
-        AirPortNode(const bool& exists_, const string& name_,const double& x_, const double& y_) : exists(exists_), name(name_),x(x_),y(y_)
-        {}
-        AirPortNode() : exists(NULL), name("n/a"), x(0), y(0)
-        {}
+//         AirPortNode(const bool& exists_, const string& name_,const double& x_, const double& y_) : exists(exists_), name(name_),x(x_),y(y_),thisPtr(NULL)
+//         {}
+//         AirPortNode() : exists(NULL), name("n/a"), x(0), y(0), thisPtr(NULL)
+//         {}
 
-    };
+//     };
 
 int main() {
-        AirPortNode curr(true,"airport", 120, 1221);
-        AirPortNode temp = curr;
-        AVLTree<int,AirPortNode> tree;
-        tree.insert(1,curr);
-        cout<<curr.exists<< " "<<curr.name<<" "<<curr.x<<" "<<curr.y<<endl;
-        curr.exists = false;
-        curr.name = "land";
-        tree.replace(1,curr);
-        temp = tree.find(1);
-        cout<<temp.exists<< " "<<temp.name<<" "<<temp.x<<" "<<temp.y<<endl;
+        // AirPortNode curr(true,"airport", 120, 1221);
+        // AirPortNode temp = curr;
+        // AVLTree<int,AirPortNode> tree;
+        // tree.insert(1,curr);
+        // cout<<curr.exists<< " "<<curr.name<<" "<<curr.x<<" "<<curr.y<<endl;
+        // curr.exists = false;
+        // curr.name = "land";
+        // tree.replace(1,curr);
+        // temp = tree.find(1);
+        // cout<<temp.exists<< " "<<temp.name<<" "<<temp.x<<" "<<temp.y<<endl;
+
+
 
         
         
@@ -40,9 +43,10 @@ int main() {
 
 
 
-    // vector<vector<string>> file = read_file();
-    // vector<pair<int,int>> routeFile = read_routes();
-    // Map test(file, routeFile);
+    vector<vector<string>> file = read_file();
+    vector<pair<int,int>> routeFile = read_routes();
+    Map test(file, routeFile);
+    test.generateMap(3214);
     // vector<int> print = test.printTree();
     // for(unsigned i = 0; i < print.size(); i++){
     //     cout<< print[i] << " " << file[i][1] <<endl;

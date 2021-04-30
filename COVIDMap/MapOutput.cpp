@@ -21,6 +21,7 @@
 
 //One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
 Map::Map(){
+    mapStartNode_ = NULL;
     allAirports_.resize(14111);
     for (unsigned i = 0; i < allAirports_.size(); i++){
         allAirports_[i].exists = false;
@@ -32,6 +33,7 @@ Map::Map(){
     _tree = tree;
 };
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
+    mapStartNode_ = NULL;
     allAirports_.resize(14111);
     for (unsigned i = 0; i < allAirports_.size(); i++){
         allAirports_[i].exists = false;
@@ -77,23 +79,69 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     readRoutes(routeFile);
 
     //this sets up our AVL Tree
-    for(int i = 0; i < routes_.size(); i++){
+    for(unsigned i = 0; i < routes_.size(); i++){
         pair<int,int> curr = routes_[i];
         vector<vector<double>> firstValue = _tree->find(curr.first);
         vector<vector<double>> secondValue = _tree->find(curr.second);
-        
-
-
-
-
+        double x1 = firstValue[0][0];
+        double x2 = firstValue[1][0];
+        double y1 = secondValue[0][0];
+        double y2 = secondValue[1][0];
+        firstValue[2].push_back(curr.second);
+        firstValue[3].push_back(EulerPath(x1,x2,y1,y2));
+        allAirports_[curr.first].destinationIDs.push_back(curr.second);
+        allAirports_[curr.first].distances.push_back(EulerPath(x1,x2,y1,y2));
+        _tree->replace(curr.first, firstValue);
     }
 
+};
+
+void Map::generateMap(int startID){
+    // allAirports_[startID].thisPtr = new MapNode(startID, allAirports_[startID].name);
+    // mapStartNode_ = allAirports_[startID].thisPtr;
+
+    hasVisited_.resize(14111);
+    for(unsigned i = 0; i < allAirports_.size(); i++){
+        if(allAirports_[i].exists){
+            allAirports_[i].thisPtr = new MapNode(i, allAirports_[i].name);
+        }
+        hasVisited_[i] = false;
+    }
+
+    mapStartNode_ = allAirports_[startID].thisPtr;
+    MapNode *& mapStartNode = mapStartNode_;
+
+    while(!createMapNodes.empty())
+        createMapNodes.pop();
+    
+    createMapNodes.push(mapStartNode);
+    while(!createMapNodes.empty()){
+        MapNode *& currMapNode = createMapNodes.front();
+        int currKey = currMapNode->key;
+        createMapNodes.pop();
+
+    for(unsigned i = 0; i < allAirports_[currKey].destinationIDs.size(); i++){
+        int nextID = allAirports_[currKey].destinationIDs[i];
+        MapNode * nextNode = allAirports_[nextID].thisPtr;
+        if(hasVisited_[nextID])
+            continue;
+        currMapNode->nodes.push_back(nextNode);
+        createMapNodes.push(nextNode);
+        }
+    }
+
+};
+
+vector<int> Map::BFSPath(int finalID){
+    vector<int> nothing {0};
+    return nothing;
 };
 
 void Map::readRoutes(vector<pair<int,int>> file){
 for(unsigned i = 0; i < file.size(); i++){
     if(allAirports_[file[i].first].exists && allAirports_[file[i].second].exists){
         routes_.push_back(make_pair(file[i].first,file[i].second));
+        allAirports_[file[i].first].destinationIDs.push_back(file[i].second);
         }
     }
 };
@@ -110,7 +158,10 @@ vector<pair<int,int>> Map::printRoutes(){
     return routes_;
 };
 // Map::generateMap(Node* start_){
-
+    
+double Map::EulerPath(double x1, double x2, double y1, double y2){
+    return 0;
+};
 
 
 // }
