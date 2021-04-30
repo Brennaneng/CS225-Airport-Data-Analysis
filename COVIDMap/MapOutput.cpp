@@ -105,6 +105,8 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     cout<<"Size of allAirports is "<<allAirports_.size()<<endl;
 
     for(unsigned i = 0; i < allAirports_.size(); i++){
+        if(usedAirports_.size() > 10)
+            break;
         if(allAirports_[i].exists){
             usedAirports_.push_back(allAirports_[i]);
             cout<<"Number of connections: "<<allAirports_[i].destinationIDs.size()<<endl;
