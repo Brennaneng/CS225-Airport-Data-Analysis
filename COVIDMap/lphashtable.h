@@ -37,6 +37,8 @@ class LPHashTable : public HashTable<K, V>
      * @param tsize The desired number of starting cells in the
      *  LPHashTable.
      */
+    LPHashTable();
+
     LPHashTable(size_t tsize);
 
     /**

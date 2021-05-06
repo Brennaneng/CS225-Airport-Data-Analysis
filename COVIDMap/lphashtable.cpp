@@ -3,6 +3,20 @@
  * Implementation of the LPHashTable class.
  */
 #include "lphashtable.h"
+#include "hashes.h"
+
+template<class K, class V>
+LPHashTable<K, V>::LPHashTable(){
+    size = findPrime(17);
+    table = new std::pair<K, V>*[size];
+    should_probe = new bool[size];
+    for (size_t i = 0; i < size; i++) {
+        table[i] = NULL;
+        should_probe[i] = false;
+    }
+    elems = 0;
+};
+
 
 template <class K, class V>
 LPHashTable<K, V>::LPHashTable(size_t tsize)

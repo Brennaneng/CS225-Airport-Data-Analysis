@@ -19,7 +19,7 @@ template <class K, class V>
 class HashTable
 {
   public:
-    /**
+     /**
      * Iterator for iterating over a hashtable.
      *
      * This example will print out all of the key, value pairs in the

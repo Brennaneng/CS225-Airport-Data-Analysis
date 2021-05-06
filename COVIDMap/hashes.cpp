@@ -29,6 +29,11 @@ namespace hashes
             h = 33 * h + key[i];
         return h % size;
     }
+    template <>
+    unsigned int hash(const int &key, int size)
+    {
+        return key % size;
+    }
 
     /**
      * Specialized hash function for character keys.

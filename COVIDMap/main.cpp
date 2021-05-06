@@ -4,29 +4,19 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include "lphashtable.h"
 
 using namespace std;
 using namespace functions;
 
-// struct AirPortNode{
-//         bool exists;
-//         string name;
-//         double x;
-//         double y;
-//         AirPortNode thisPtr;
-
-//         AirPortNode(const bool& exists_, const string& name_,const double& x_, const double& y_) : exists(exists_), name(name_),x(x_),y(y_),thisPtr(NULL)
-//         {}
-//         AirPortNode() : exists(NULL), name("n/a"), x(0), y(0), thisPtr(NULL)
-//         {}
-
-//     };
 struct MapNode {
         int key;
         string value;
         int currentWeight;
-        vector<MapNode*> nodes;
-        MapNode* prev;
+        vector<int> nodes;
+        double x;
+        double y;
+        int prev;
 
         /**
          * Node constructor; sets children to point to `NULL`.
@@ -34,13 +24,42 @@ struct MapNode {
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        MapNode(const int& newKey, const string& newValue)
-            : key(newKey), value(newValue), currentWeight(-1)
+        MapNode(const int& newKey, const string& newValue, int lat, int lon)
+            : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
         {
         }
+        MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1), y(-1), prev(-1)
+        {}
     };
 
 int main() {
+
+        LPHashTable<int,MapNode> hello(5);
+        MapNode temp (1,"mr world wide", 2, 3);
+        hello.insert(1, temp);
+        MapNode &curr = hello[1];
+        curr.value = "not mr world wide >:(";
+        temp = hello.find(1);
+        cout<<"ID 1 has a name of "<<temp.value;
+        
+    //miguels code for printing the hash table
+    //     // for (int i = 0; i < hello.tableSize(); i++) {
+    //     //     if(hello[i].key != -1)
+    //     cout <<"----------------------\n";
+    //     cout <<"Index = "<< 1 << endl;
+    //     cout <<"Airport ID = "<< hello[1].key << endl;
+    //     cout <<"Airport Name = "<< hello[1].value << endl;
+    //     cout <<"Longitude/Latitude "<< HashTable[1]->key << endl;
+    //     cout <<"----------------------\n";
+    // }
+
+
+
+
+
+
+
+
         // AirPortNode curr(true,"airport", 120, 1221);
         // AirPortNode temp = curr;
         // AVLTree<int,AirPortNode> tree;
@@ -53,8 +72,8 @@ int main() {
         // cout<<temp.exists<< " "<<temp.name<<" "<<temp.x<<" "<<temp.y<<endl;
 
         //presenting demo BFS
-        Map demo;
-        demo.democreateMap();
+        // Map demo;
+        // demo.democreateMap();
         
     //set up for next part
         // vector<vector<string>> file = read_file();
@@ -68,7 +87,7 @@ int main() {
     // for(unsigned i = 0; i < airportsToPrint.size(); i++){
     //     pair<int,string> curr = airportsToPrint[i];
     //     cout<<"Airport ID: "<<curr.first<<" is associated with the airport "<<curr.second<<endl;
-    // }
+    //}
 
     //presenting the routes between all the airports we analyze
     // for(unsigned i = 0; i < routesUsed.size(); i++){

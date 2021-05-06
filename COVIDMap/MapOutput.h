@@ -3,23 +3,23 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "avltree.h"
 #include "ReadFile.h"
 #include <sstream>
 #include <fstream>
-#include "TreeTraversals/PreorderTraversal.h"
-#include "TreeTraversals/InorderTraversal.h"
 #include <queue>
 #include <list>
 #include <algorithm>
+#include "lphashtable.h"
 
 using namespace functions;
 using namespace std;
 
 class Map{
     public:
+
+    Map();
     
-    Map(); //this will create the binary tree
+    //Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
     
     vector<pair<int,string>> printAirports();
@@ -34,18 +34,13 @@ class Map{
     // string getValue(int key);
 
     void insertStates();
-    //must generate map before conducting BFSPath
-    string generateMap(int startID);
 
     vector<int> BFSPath(int finalID);
 
     double EulerPath(double x1, double x2, double y1, double y2);
 
     int returnNode(int ID);
-
-    void democreateMap();
     
-    void addPath(int x, int y);
     
     private:
 
@@ -55,8 +50,10 @@ class Map{
         int key;
         string value;
         int currentWeight;
-        vector<MapNode*> nodes;
-        MapNode* prev;
+        vector<int> nodes;
+        double x;
+        double y;
+        int prev;
 
         /**
          * Node constructor; sets children to point to `NULL`.
@@ -64,55 +61,27 @@ class Map{
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        MapNode(const int& newKey, const string& newValue)
-            : key(newKey), value(newValue), currentWeight(-1)
+        MapNode(const int& newKey, const string& newValue, int lat, int lon)
+            : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
         {
         }
-        MapNode() {
-            key = 0;
-            value = "empty";
-            currentWeight = 0;
-        }
-    };
-    
-
-    struct AirPortNode{
-        bool exists;
-        int key;
-        string name;
-        double x;
-        double y;
-        MapNode * thisPtr;
-        vector<int> destinationIDs;
-        vector<double> distances;
-
-        AirPortNode(const bool& exists_, const int& key_, const string& name_,const double& x_, const double& y_) : 
-        exists(exists_),key(key_), name(name_),x(x_),y(y_),thisPtr(NULL)
+        MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1), y(-1), prev(-1)
         {}
-        AirPortNode() : exists(false),key(0), name("n/a"), x(0), y(0), thisPtr(NULL)
-        {}
-
     };
 
-    vector<string> demoBFS(vector<MapNode*> airports);
+    LPHashTable<int,MapNode> IDTable_;
 
     vector<MapNode*> airports;
-
-    int binarySearch(const vector<AirPortNode>& elements, int start, int end, const int& val);
     
     vector<int> hasVisited_;
 
-    MapNode * mapStartNode_;
+    int mapStartNode_;
 
-    vector<AirPortNode> allAirports_;
+    //vector<AirPortNode> allAirports_;
 
-    vector<AirPortNode> usedAirports_;
+    vector<MapNode> usedAirports_;
 
     vector<pair<int,int>> routes_;
-
-    AVLTree<int,vector<vector<double>>> * _tree;
-
-    vector<string> * States; 
 
     queue<MapNode*> createMapNodes;
 
