@@ -68,6 +68,11 @@ class Map{
             : key(newKey), value(newValue), currentWeight(-1)
         {
         }
+        MapNode() {
+            key = 0;
+            value = "empty";
+            currentWeight = 0;
+        }
     };
     
 
