@@ -85,7 +85,7 @@ vector<vector<string>> read_file() {
 
     }
 
-    TotalFile.resize(20);
+    //TotalFile.resize(20);
     cout<<"Done"<<endl;
     return TotalFile;
 };

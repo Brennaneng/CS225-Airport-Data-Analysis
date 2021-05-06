@@ -43,13 +43,18 @@ Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     }
     readRoutes(routeFile);
 
-    //this makes the connections using the routes vector
-    for(unsigned i = 0; i < routes_.size(); i++){
-        //pair<int,int> curr = routes_[i];
-        
-    }
-    cout<<"Size of used airports is "<<usedAirports_.size()<<endl;
-    cout<<"Size of used airports is "<<usedAirports_.size()<<endl;
+    //uncomment this to print all the airports and their connections
+
+    // for(int i = 0; i < 14410; i++){
+    //     if(IDTable_.keyExists(i)){
+    //     cout<< "Current airport is "<< IDTable_[i].value<<endl;
+    //     for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
+    //         int connID = IDTable_[i].nodes[j];
+    //         cout<<"--->"<<IDTable_[connID].value<<endl;
+    //     }
+    //     }
+    // }
+
 
 };
 
@@ -65,14 +70,11 @@ void Map::readRoutes(vector<pair<int,int>> file){
     int firstID = file[i].first;
     int secondID = file[i].second;
     if(IDTable_.keyExists(firstID) && IDTable_.keyExists(secondID)) {
-        //MapNode 
+        MapNode &firstNode = IDTable_[firstID];
+        firstNode.nodes.push_back(secondID);
+        routes_.push_back(make_pair(firstID,secondID));        
+        }
     }
-
-//     if(allAirports_[file[i].first].exists && allAirports_[file[i].second].exists){
-//             allAirports_[file[i].first].destinationIDs.push_back(file[i].second);
-//             routes_.push_back(make_pair(file[i].first,file[i].second));
-//         }
-     }
 };
 
 vector<pair<int,string>> Map::printAirports(){
