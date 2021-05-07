@@ -79,6 +79,10 @@ int main() {
         vector<vector<string>> file = read_file();
         vector<pair<int,int>> routeFile = read_routes();
         Map airports(file, routeFile);
+        airports.printName(9739);
+        airports.printName(9744);
+        airports.printName(3599);
+        airports.findPath(9739,3599);
 
         // vector<pair<int,string>> airportsToPrint = airports.printAirports();
         // vector<pair<int,int>> routesUsed = airports.printRoutes();

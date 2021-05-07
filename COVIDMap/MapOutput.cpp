@@ -24,88 +24,129 @@ Map::Map(){
     
 };
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
-    usedAirports_.clear();
-
     //File is total data.
     for(unsigned i = 0; i < file.size(); i++){
+        //grabs the ID from the current line in the file
         int ID = stoi(file[i][0]);
         //this is important to the implemenatation
+        //creates a MapNode to be inserted to the hashtable
         MapNode curr(ID,file[i][1], stod(file[i][3]), stod(file[i][4]));
         IDTable_.insert(ID, curr);
 
-        //IDTable_.insert(ID,)
-        // allAirports_[ID].exists = true;
-        // allAirports_[ID].name = file[i][1];
-        // allAirports_[ID].x = stod(file[i][3]);
-        // allAirports_[ID].y = stod(file[i][4]);
-        // allAirports_[ID].key = ID;
-        
     }
+    //this creates the routes_ vector and adds the connections to each MapNode
     readRoutes(routeFile);
-
-    //uncomment this to print all the airports and their connections
-
-    // for(int i = 0; i < 14410; i++){
-    //     if(IDTable_.keyExists(i)){
-    //     cout<< "Current airport is "<< IDTable_[i].value<<endl;
-    //     for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
-    //         int connID = IDTable_[i].nodes[j];
-    //         cout<<"--->"<<IDTable_[connID].value<<endl;
-    //     }
-    //     }
-    // }
-
-
 };
 
+Map::~Map(){
+    airports.clear();
+    hasVisited_.clear();
+    routes_.clear();
+   //~IDTable_;
+}
+
+void Map::printName(int ID){
+    //this prints the corresponding airport to the ID if it exists
+    if(!IDTable_.keyExists(ID)){
+        cout<<"ID doesn't exist"<<endl;
+        return;
+    }
+    cout<<"ID "<<ID<<" is airport "<<IDTable_[ID].value<<endl;
+};
+
+void Map::findPath(int startID, int finalID){
+    //this finds a path between any two IDs using BFS
+
+    //if neither ID exists, then a path cannot exist
+    if(!IDTable_.keyExists(startID) || !IDTable_.keyExists(finalID)){
+        cout<<"A path does not exist"<<endl;
+        return;
+    }
+
+    queue<int> traversal;
+    traversal.push(startID);
+    //if the flag remains false by the end of the BFS, a path doesn't exist
+    bool flag = false;
+    while(!traversal.empty()){
+        int currID = traversal.front();
+        MapNode *curr = &IDTable_[currID];
+        traversal.pop();
+
+        while(!traversal.empty() && curr->currentWeight!=-1){
+            currID = traversal.front();
+            curr = &IDTable_[currID];
+            traversal.pop();
+        }
+
+        curr->currentWeight = 1;
+        //this for loop iterates through all the nodes the current node points to
+        //if the next potential node has already been visited, we don't care about it
+        for(unsigned i = 0; i < curr->nodes.size(); i++){
+            int nextID = curr->nodes[i];
+            MapNode *nextPotential = &IDTable_[nextID];
+            if(nextPotential->currentWeight == -1){
+                traversal.push(nextID);
+                nextPotential->prev = currID;
+                if(nextID == finalID){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if(flag)
+            break;
+    }
+    if(!flag){
+        cout<<"No path exists"<<endl;
+        return;
+    }
+    //this prints the path to the terminal
+    int from = -1;
+    int to = finalID;
+    while(to != startID){
+        MapNode &curr = IDTable_[to];
+        from = curr.prev;
+        cout<<"From "<<from<<" to "<<to<<endl;
+        to = from;
+    }
 
 
-vector<int> Map::BFSPath(int finalID){
-    vector<int> nothing {0};
-    return nothing;
 };
 
 void Map::readRoutes(vector<pair<int,int>> file){
+//this iterates through the entire routes csv
  for(unsigned i = 0; i < file.size(); i++){
     int firstID = file[i].first;
     int secondID = file[i].second;
+    //if neither ID exists, then a route cannot exist
     if(IDTable_.keyExists(firstID) && IDTable_.keyExists(secondID)) {
         MapNode &firstNode = IDTable_[firstID];
+        //the connection is added to the first node
+        //the connection pair is pushed to the routes vector
         firstNode.nodes.push_back(secondID);
         routes_.push_back(make_pair(firstID,secondID));        
         }
     }
 };
 
-vector<pair<int,string>> Map::printAirports(){
-    //return _tree->getInorderTraversal();
-    vector<pair<int,string>> temp;
-    for(unsigned i = 0; i < usedAirports_.size(); i++){
-        temp.push_back(make_pair(usedAirports_[i].key,usedAirports_[i].value));
+void Map::printAirports(){
+    for(int i = 0; i < 14410; i++){
+        if(IDTable_.keyExists(i)){
+        cout<< "Current airport is "<< IDTable_[i].value<<endl;
+        for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
+            int connID = IDTable_[i].nodes[j];
+            cout<<"--->"<<IDTable_[connID].value<<endl;
+        }
+        }
     }
-    return temp;
 };
-
-// string Map::getValue(int key){
-//     return _tree->find(key);
-// }
 
 vector<pair<int,int>> Map::printRoutes(){
     return routes_;
 };
-// Map::generateMap(Node* start_){
-int Map::returnNode(int ID){
-    // int idx = binarySearch(usedAirports_,0,usedAirports_.size()-1, ID);
-    // if(idx==-1)
-    //     return -1;
-    // MapNode * value = new MapNode(ID, usedAirports_[idx].name);
-    //return value->key;
-    return -1;
-};
+
     
-double Map::EulerPath(double x1, double x2, double y1, double y2){
-    return 0;
-};
+
 
 
 double Map::toRadians(const double degree)

@@ -18,11 +18,15 @@ class Map{
     public:
 
     Map();
+
+    ~Map();
     
     //Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
+
+    void printName(int ID);
     
-    vector<pair<int,string>> printAirports();
+    void printAirports();
 
     vector<pair<int,int>> printRoutes();
 
@@ -35,17 +39,12 @@ class Map{
 
     void insertStates();
 
-    vector<int> BFSPath(int finalID);
-
-    double EulerPath(double x1, double x2, double y1, double y2);
-
-    int returnNode(int ID);
-    
+    void findPath(int startID, int finalID);
     
     private:
 
     
-
+    //this MapNode struct is how we create our graph of airports and connections
     struct MapNode {
         int key;
         string value;
@@ -69,20 +68,13 @@ class Map{
         {}
     };
 
+    //this hash table holds our map
     LPHashTable<int,MapNode> IDTable_;
 
     vector<MapNode*> airports;
     
     vector<int> hasVisited_;
 
-    int mapStartNode_;
-
-    //vector<AirPortNode> allAirports_;
-
-    vector<MapNode> usedAirports_;
-
     vector<pair<int,int>> routes_;
-
-    queue<MapNode*> createMapNodes;
 
 };
