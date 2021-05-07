@@ -17,13 +17,6 @@ HashTable::hash() {
 int HashTable::hash(int key) {
     int 
 }
-//hash helper functions since we are double hashing
-int HashTable::hash1(string key){
-
-}
-int HashTable::hash2(string key){
-    
-}
 
 void HashTable::addMapNode(int id) {
     int index = hash(ID);

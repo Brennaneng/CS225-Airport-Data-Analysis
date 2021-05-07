@@ -32,8 +32,6 @@ class HashTable {
         void removeMapNode(int id);
     private:
         //helper functions of hash
-        int hash1(string key);
-        int hash2(string key);
         static const int tableSize;
         MapNode item;
         MapNode* HashTable[tableSize];

@@ -40,18 +40,19 @@ int main() {
         MapNode &curr = hello[1];
         curr.value = "not mr world wide >:(";
         temp = hello.find(1);
-        cout<<"ID 1 has a name of "<<temp.value;
-        
-    //miguels code for printing the hash table
-    //     // for (int i = 0; i < hello.tableSize(); i++) {
-    //     //     if(hello[i].key != -1)
-    //     cout <<"----------------------\n";
-    //     cout <<"Index = "<< 1 << endl;
-    //     cout <<"Airport ID = "<< hello[1].key << endl;
-    //     cout <<"Airport Name = "<< hello[1].value << endl;
-    //     cout <<"Longitude/Latitude "<< HashTable[1]->key << endl;
-    //     cout <<"----------------------\n";
-    // }
+        cout<<"ID 1 has a name of "<<temp.value<< endl;
+        for( int i = 0; i < 14410; i++) {
+            if(hello.keyExists(i)) {
+                cout <<"----------------------\n";
+                cout <<"Index = "<< i << endl;
+                cout <<"Airport ID = "<< hello[i].key << endl;
+                cout <<"Airport Name = "<< hello[i].value << endl;
+                cout <<"Longitude/Latitude = "<< hello[i].x <<"/"<< hello[i].y << endl;
+                cout <<"----------------------\n";
+            }
+        }
+        return 0;
+    }
 
 
 
@@ -142,6 +143,3 @@ int main() {
     // if ((dataVector.back()).back() == "/n") {
     //     cout<< (dataVector.back()).back()<< "ok" << endl;
     // } 
-    
-    return 0;
-}
