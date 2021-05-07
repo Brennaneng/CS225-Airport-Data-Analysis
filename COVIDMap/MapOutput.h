@@ -40,7 +40,11 @@ class Map{
     void insertStates();
 
     void findPath(int startID, int finalID);
-    
+        
+    int minDistance(int dist[], bool sprSet[]);
+    void dijkstra(int src);
+    void printSolution(int dist[]);
+
     private:
 
     
