@@ -41,7 +41,10 @@ class Map{
 
     int returnNode(int ID);
     
-    
+    int minDistance(int dist[], bool sprSet[]);
+    void dijkstra(int src);
+    void printSolution(int dist[]);
+
     private:
 
     
