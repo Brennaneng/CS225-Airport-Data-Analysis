@@ -9,6 +9,7 @@
 #include <queue>
 #include <list>
 #include <algorithm>
+#include<limits.h>
 #include "lphashtable.h"
 
 using namespace functions;
@@ -43,9 +44,8 @@ class Map{
 
     void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
         
-    // int minDistance(int dist[], bool sprSet[]);
-    // void dijkstra(int src);
-    // void printSolution(int dist[]);
+    void dijkstra(int src);
+    void printSolution(int dist[]);
 
     private:
 
@@ -74,7 +74,7 @@ class Map{
         MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1), y(-1), prev(-1)
         {}
     };
-
+    int minDistance(int dist[], bool visited[], MapNode & curr);
     //this hash table holds our map
     LPHashTable<int,MapNode> IDTable_;
 
