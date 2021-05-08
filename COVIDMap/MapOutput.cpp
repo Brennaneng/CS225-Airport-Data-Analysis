@@ -153,7 +153,7 @@ void Map::readRoutes(vector<pair<int,int>> file){
 };
 
 void Map::printAirports(){
-    for(int i = 0; i < 14410; i++){
+    for(int i = 0; i < 14111; i++){
         if(IDTable_.keyExists(i)){
         cout<< "Current airport is "<< IDTable_[i].value<<endl;
         for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
@@ -209,7 +209,7 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
      
     // Calculate the result
     ans = ans * R;
-    ans = abs(ans);
+    //ans = abs(ans);
     return ans;
 };
 
@@ -233,8 +233,8 @@ int Map::minDistance(int dist[], bool visited[], MapNode & curr)
 void Map::printSolution(int dist[])
 {
     printf("Vertex \t\t Distance from Source\n");
-    for (unsigned int i = 0; i < V - 1; i++)
-        printf("%d \t\t %d\n", i, dist[i]);
+    for (unsigned int i = 0; i < 3000; i++)
+        printf("%d \t\t %d\n", i, (dist[i]));
 }
   
 // Function that implements Dijkstra's single source shortest path algorithm
@@ -249,10 +249,11 @@ void Map::dijkstra(int src)
   
     // Initialize all distances as INFINITE and stpSet[] as false
     for (int i = 0; i < V - 1; i++) {
-        visited[i] = false;
+       dist[i] = INT_MAX, visited[i] = false;
     }
     // Distance of source vertex from itself is always 0
     IDTable_[src].currentWeight = 0;
+    dist[src] = 0;
 
   
     // Find shortest path for all vertices
