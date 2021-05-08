@@ -67,9 +67,19 @@ vector<vector<string>> read_file() {
             while(getline(ss,datapoint, ',')){
                 line.push_back(datapoint);
             }
-            if(line[2] == "United States"){
-                TotalFile.push_back(line);
-            }
+            //uncomment this if you want to select a specific country
+            // if(line[2] == "Germany"){
+            //     TotalFile.push_back(line);
+            // }
+            //uncomment this if you want all airports
+            vector<string> temp;
+            temp.push_back(line[0]);
+            temp.push_back(line[1]);
+            temp.push_back(line[line.size()-3]);
+            temp.push_back(line[line.size()-2]);
+            temp.push_back(line[line.size()-1]);
+            TotalFile.push_back(temp);
+            //leave this line clear at all times
             line.clear();
             
         }
@@ -85,7 +95,7 @@ vector<vector<string>> read_file() {
 
     }
 
-    TotalFile.resize(20);
+    //TotalFile.resize(20);
     cout<<"Done"<<endl;
     return TotalFile;
 };

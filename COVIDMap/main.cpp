@@ -34,23 +34,33 @@ struct MapNode {
 
 int main() {
 
-        LPHashTable<int,MapNode> hello(5);
-        MapNode temp (1,"mr world wide", 2, 3);
-        hello.insert(1, temp);
-        MapNode &curr = hello[1];
-        curr.value = "not mr world wide >:(";
-        temp = hello.find(1);
-        cout<<"ID 1 has a name of "<<temp.value<< endl;
-        for( int i = 0; i < 14410; i++) {
-            if(hello.keyExists(i)) {
-                cout <<"----------------------\n";
-                cout <<"Index = "<< i << endl;
-                cout <<"Airport ID = "<< hello[i].key << endl;
-                cout <<"Airport Name = "<< hello[i].value << endl;
-                cout <<"Longitude/Latitude = "<< hello[i].x <<"/"<< hello[i].y << endl;
-                cout <<"----------------------\n";
-            }
-        }
+        // LPHashTable<int,MapNode> hello(5);
+        // MapNode temp (1,"mr world wide", 2, 3);
+        // hello.insert(1, temp);
+        // MapNode &curr = hello[1];
+        // curr.value = "not mr world wide >:(";
+        // temp = hello.find(1);
+        // cout<<"ID 1 has a name of "<<temp.value<< endl;
+        // for( int i = 0; i < 14410; i++) {
+        //     if(hello.keyExists(i)) {
+        //         cout <<"----------------------\n";
+        //         cout <<"Index = "<< i << endl;
+        //         cout <<"Airport ID = "<< hello[i].key << endl;
+        //         cout <<"Airport Name = "<< hello[i].value << endl;
+        //         cout <<"Longitude/Latitude = "<< hello[i].x <<"/"<< hello[i].y << endl;
+        //         cout <<"----------------------\n";
+        //     }
+        // }
+        vector<vector<string>> file = read_file();
+        vector<pair<int,int>> routeFile = read_routes();
+        Map airports(file, routeFile);
+        airports.findSCC(file, routeFile);
+        // airports.printAirports();
+        // airports.printName(100);
+        // airports.printName(3599);
+        // airports.findPath(100,3599);
+
+
         return 0;
     }
 
@@ -80,6 +90,10 @@ int main() {
         // vector<vector<string>> file = read_file();
         // vector<pair<int,int>> routeFile = read_routes();
         // Map airports(file, routeFile);
+        // airports.printName(9739);
+        // airports.printName(9744);
+        // airports.printName(3599);
+        // airports.findPath(9739,3599);
 
         // vector<pair<int,string>> airportsToPrint = airports.printAirports();
         // vector<pair<int,int>> routesUsed = airports.printRoutes();
