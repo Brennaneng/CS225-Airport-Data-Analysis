@@ -214,15 +214,18 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
 };
 
 
-int Map::minDistance(int dist[], bool visited[], MapNode & curr)
+double Map::minDistance(double dist[], bool visited[], MapNode & curr)
 {
     // Initialize min value
-    int min = INT_MAX, min_index;
+    double min = INT_MAX, min_index;
     // iterate through the routes 
     for (unsigned int v = 0; v < curr.nodes.size(); v++){
         MapNode * temp = &IDTable_[curr.nodes[v]];
         double distance = Eulerpath(curr.x, curr.y, temp->x, temp->y);
-        dist[temp->key] = distance + curr.currentWeight;
+        if(dist[temp->key] > distance + curr.currentWeight){
+            dist[temp->key] = distance + curr.currentWeight;
+            temp->currentWeight = dist[temp->key];
+        }
         if (visited[v] == false && dist[temp->key] <= min)
             min = dist[temp->key], min_index = temp->key;
     }
@@ -230,18 +233,24 @@ int Map::minDistance(int dist[], bool visited[], MapNode & curr)
 }
   
 //A utility function to print the constructed distance array
-void Map::printSolution(int dist[])
+void Map::printSolution(double dist[])
 {
     printf("Vertex \t\t Distance from Source\n");
-    for (unsigned int i = 0; i < 3000; i++)
-        printf("%d \t\t %d\n", i, (dist[i]));
+    for (unsigned int i = 2000; i < 3000; i++)
+        printf("%d \t\t %f\n", i, (dist[i]));
+    cout << IDTable_[2965].x <<endl;
+    cout << IDTable_[2965].y << endl;
+    cout << IDTable_[2990].x <<endl;
+    cout << IDTable_[2990].y <<endl;
+    cout << IDTable_[2965].currentWeight << endl;
+    cout << IDTable_[2990].currentWeight << endl;
 }
   
 // Function that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
 void Map::dijkstra(int src)
 {
-    int dist[V]; // The output array.  dist[i] will hold the shortest
+    double dist[V]; // The output array.  dist[i] will hold the shortest
     // // distance from src to i
   
     bool visited[V]; // visited[i] will be true if vertex i is included in shortest
@@ -284,7 +293,7 @@ void Map::dijkstra(int src)
             if (curr.nodes[v] == u) {
                 MapNode * temp2 = &IDTable_[curr.nodes[v]];
                 MapNode * temp3 = &IDTable_[u];
-                int newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
+                double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
              if (!visited[v]  && dist[u] != INT_MAX
                 && dist[u] + newDist < dist[temp2->key]) {
                 dist[temp2->key] = dist[u] + newDist;

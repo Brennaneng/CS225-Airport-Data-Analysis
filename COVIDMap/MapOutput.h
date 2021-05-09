@@ -45,7 +45,7 @@ class Map{
     void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
         
     void dijkstra(int src);
-    void printSolution(int dist[]);
+    void printSolution(double dist[]);
 
     private:
 
@@ -67,14 +67,14 @@ class Map{
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        MapNode(const int& newKey, const string& newValue, int lat, int lon)
+        MapNode(const int& newKey, const string& newValue, double lat, double lon)
             : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
         {
         }
         MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1), y(-1), prev(-1)
         {}
     };
-    int minDistance(int dist[], bool visited[], MapNode & curr);
+    double minDistance(double dist[], bool visited[], MapNode & curr);
     //this hash table holds our map
     LPHashTable<int,MapNode> IDTable_;
 
