@@ -297,6 +297,7 @@ void Map::dijkstra(int src)
              if (!visited[v]  && dist[u] != INT_MAX
                 && dist[u] + newDist < dist[temp2->key]) {
                 dist[temp2->key] = dist[u] + newDist;
+                temp2->currentWeight = dist[temp2->key];
              }
             }
         }
