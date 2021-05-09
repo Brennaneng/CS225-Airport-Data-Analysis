@@ -39,4 +39,8 @@
 1. **Log for 4/29/2021**
     As of today, our group decided on a concensus that we longer want to pursue our COVID map idea because it lacked the complexity in order to fulfill the requirements for this final project. We will resort to another proposal idea that has been updated in PROPOSAL.md
 
-    
+1. **Log for 5/3/2021 - 5/7/2021**
+    As of today our group has finished the hash table function to better compress our data so our ews computer can run it. We have finished the BFS algorithm that traverses through the hash table to find **a** route from one destination to another. Miguel is still continuing to work on Strongly connected components so that we can see supernodes of certain airports. Dijkstras is almost finished but we are running into some cases where the algorithm does not calculate properly.
+
+1. **Log for 5/9/2021**
+    Brennan and Edson are continuing to work on Dijkstras
