@@ -1,7 +1,7 @@
 #include "MapOutput.h"
 #include <stack>
 
-#define V 14111
+#define V 14110
 //here is where we will create a map object. We will specify what kind of map where are working with meaning
 //that if we want a map for deaths, we create a map object called deaths. If we do a map for deaths, then we will
 //create a tree of states where each value is a vector full of deaths for each month. If we do a map for positive cases, 
@@ -205,7 +205,8 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
     // Radius of Earth in
     // Kilometers, R = 6371
     // Use R = 3956 for miles
-    double R = 6371;
+    double R = 3956; //MI
+    //double R = 6371; //KM
      
     // Calculate the result
     ans = ans * R;
@@ -222,7 +223,7 @@ double Map::minDistance(double dist[], bool visited[], MapNode & curr)
     for (unsigned int v = 0; v < curr.nodes.size(); v++){
         MapNode * temp = &IDTable_[curr.nodes[v]];
         double distance = Eulerpath(curr.x, curr.y, temp->x, temp->y);
-        if(dist[temp->key] > distance + curr.currentWeight){
+        if(dist[temp->key] >= distance + curr.currentWeight){
             dist[temp->key] = distance + curr.currentWeight;
             temp->currentWeight = dist[temp->key];
         }
@@ -231,20 +232,33 @@ double Map::minDistance(double dist[], bool visited[], MapNode & curr)
     }
     return min_index;
 }
-  
-//A utility function to print the constructed distance array
-void Map::printSolution(double dist[])
-{
-    printf("Vertex \t\t Distance from Source\n");
-    for (unsigned int i = 2000; i < 3000; i++)
-        printf("%d \t\t %f\n", i, (dist[i]));
-    cout << IDTable_[2965].x <<endl;
-    cout << IDTable_[2965].y << endl;
-    cout << IDTable_[2990].x <<endl;
-    cout << IDTable_[2990].y <<endl;
-    cout << IDTable_[2965].currentWeight << endl;
-    cout << IDTable_[2990].currentWeight << endl;
+
+void Map::printPath(int parent[], int j){
+    if(parent[j] == -1){
+        return;
+    }
+    printPath(parent, parent[j]);
+    printf("->%d",j);
 }
+
+
+//A utility function to print the constructed distance array
+void Map::printSolution(double dist[], int parent[], int src)
+{
+    printf("Vertex \t\t Distance from Source \t Path \n");
+    for (unsigned int i = 0; i < 1000; i++){
+        if(dist[i] == INT_MAX){
+            //printf("airport doesn't exist\n");
+            continue;
+        }
+        printf("\n %d -> %d \t\t %f \t\t %d", src, i, (dist[i]), src);
+        printPath(parent, src);
+    }
+
+    // for(unsigned int i = 0; i < IDTable_[714].nodes.size(); i++){
+    //     cout << IDTable_[714].nodes[i] << endl;
+    // }
+ }
   
 // Function that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
@@ -255,10 +269,13 @@ void Map::dijkstra(int src)
   
     bool visited[V]; // visited[i] will be true if vertex i is included in shortest
     // path tree or shortest distance from src to i is finalized
-  
+    
+    int parent[V]; //Parent array to store shortest path tree
+
     // Initialize all distances as INFINITE and stpSet[] as false
-    for (int i = 0; i < V - 1; i++) {
+    for (int i = 0; i < V; i++) {
        dist[i] = INT_MAX, visited[i] = false;
+       parent[src] = -1;
     }
     // Distance of source vertex from itself is always 0
     IDTable_[src].currentWeight = 0;
@@ -266,7 +283,7 @@ void Map::dijkstra(int src)
 
   
     // Find shortest path for all vertices
-    for(int airID = 0; airID < V; airID++){ //curr airport node
+    for(int airID = 0; airID < V-1; airID++){ //curr airport node
     //for (unsigned int count = 0; count != V - 1; count++) {
         // Pick the minimum distance vertex from the set of vertices not
         // yet processed. u is always equal to src in the first iteration.
@@ -296,6 +313,7 @@ void Map::dijkstra(int src)
                 double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
              if (!visited[v]  && dist[u] != INT_MAX
                 && dist[u] + newDist < dist[temp2->key]) {
+                parent[temp2->key] = temp3->key;
                 dist[temp2->key] = dist[u] + newDist;
                 temp2->currentWeight = dist[temp2->key];
              }
@@ -304,7 +322,7 @@ void Map::dijkstra(int src)
     }
   
     // print the constructed distance array
-    printSolution(dist);
+    printSolution(dist, parent, src);
 }
 
 

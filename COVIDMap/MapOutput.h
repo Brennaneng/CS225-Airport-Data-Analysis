@@ -43,9 +43,9 @@ class Map{
     void findPath(int startID, int finalID);
 
     void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
-        
+    void printPath(int parent[], int j);
     void dijkstra(int src);
-    void printSolution(double dist[]);
+    void printSolution(double dist[], int parent[], int src);
 
     private:
 
