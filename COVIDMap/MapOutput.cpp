@@ -311,12 +311,12 @@ void Map::dijkstra(int src)
                 MapNode * temp2 = &IDTable_[curr.nodes[v]];
                 MapNode * temp3 = &IDTable_[u];
                 double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
-             if (!visited[v]  && dist[u] != INT_MAX
-                && dist[u] + newDist < dist[temp2->key]) {
-                parent[temp2->key] = temp3->key;
-                dist[temp2->key] = dist[u] + newDist;
-                temp2->currentWeight = dist[temp2->key];
-             }
+                if (!visited[v]  && dist[u] != INT_MAX && dist[u] + newDist < dist[temp2->key]) {
+                    parent[temp2->key] = temp3->key;
+                    dist[temp2->key] = dist[u] + newDist;
+                    temp2->currentWeight = dist[temp2->key];
+                    //test
+                }
             }
         }
     }
