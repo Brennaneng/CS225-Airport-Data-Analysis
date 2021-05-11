@@ -9,6 +9,7 @@
 #include <queue>
 #include <list>
 #include <algorithm>
+#include<limits.h>
 #include "lphashtable.h"
 #include <stack>
 
@@ -42,6 +43,7 @@ class Map{
 
     void findPath(int startID, int finalID);
 
+<<<<<<< HEAD
     vector<int> findSCC(vector<vector<string>> file);
 
     void dfs(int i, vector<vector<string>> file);      
@@ -53,6 +55,12 @@ class Map{
     // void printSolution(int dist[]);
     int sccCount;
     
+=======
+    void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
+    void printPath(int parent[], int j);
+    void dijkstra(int src);
+    void printSolution(double dist[], int parent[], int src);
+>>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
 
     private:
 
@@ -80,7 +88,7 @@ class Map{
         MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1.0), y(-1.0), prev(-1)
         {}
     };
-
+    double minDistance(double dist[], bool visited[], MapNode & curr);
     //this hash table holds our map
     LPHashTable<int,MapNode> IDTable_;
 
@@ -94,6 +102,10 @@ class Map{
     vector<int> ids;
     vector<int> low;
     vector<bool> onStack;
+<<<<<<< HEAD
     stack<int> mystack;
     int id;   
+=======
+    //test
+>>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
 };

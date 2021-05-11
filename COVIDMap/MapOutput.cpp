@@ -1,6 +1,7 @@
 #include "MapOutput.h"
 #include <stack>
 
+#define V 14110
 //here is where we will create a map object. We will specify what kind of map where are working with meaning
 //that if we want a map for deaths, we create a map object called deaths. If we do a map for deaths, then we will
 //create a tree of states where each value is a vector full of deaths for each month. If we do a map for positive cases, 
@@ -46,6 +47,7 @@ Map::~Map(){
    //~IDTable_;
 }
 
+<<<<<<< HEAD
 void Map::printSCC(vector<int> low, vector<vector<string>> file) {
     for(int i = 0; i<low.size(); i++) {
         cout<<file[i][1]<<" is part of Super Node: "<< low[i]<< endl;
@@ -91,6 +93,28 @@ void Map::dfs(int i, vector<vector<string>> file) {
             }
             index++;
         }
+=======
+// void Map::findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile) {
+//     // # of nodes = airports
+//     int n = file.size();
+//     // # SCC's found
+//     int sccCount = 0;
+//     // # i in the vector represents the airport in index i in the file
+//     ids.resize(n,-1);
+//     low.resize(n,0);
+//     onStack.resize(n,false);
+
+//     cout <<onStack.size()<<"hey"<<endl;
+//     stack<int> stack;
+
+//     // for(int i = 0; i < n; i++) {
+//     //     if(ids[i] == -1){
+//     //         dfs(i)
+//     //     }
+//     // }
+//     //return low;
+// };
+>>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
 
         if(ids[index] == -1) {
             dfs(index,file);
@@ -200,7 +224,7 @@ void Map::readRoutes(vector<pair<int,int>> file){
 };
 
 void Map::printAirports(){
-    for(int i = 0; i < 14410; i++){
+    for(int i = 0; i < 14111; i++){
         if(IDTable_.keyExists(i)){
         cout<< "Current airport is "<< IDTable_[i].value<<endl;
         for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
@@ -252,75 +276,127 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
     // Radius of Earth in
     // Kilometers, R = 6371
     // Use R = 3956 for miles
-    double R = 6371;
+    double R = 3956; //MI
+    //double R = 6371; //KM
      
     // Calculate the result
     ans = ans * R;
- 
+    //ans = abs(ans);
     return ans;
 };
 
 
-// int Map::minDistance(int dist[], bool sptSet[])
-// {
-//     // Initialize min value
-//     int min = INT_MAX, min_index;
-  
-//     for (int v = 0; v < V; v++)
-//         if (sptSet[v] == false && dist[v] <= min)
-//             min = dist[v], min_index = v;
-  
-//     return min_index;
-// }
-  
-// A utility function to print the constructed distance array
-// void Map::printSolution(int dist[])
-// {
-//     printf("Vertex \t\t Distance from Source\n");
-//     for (int i = 0; i < V; i++)
-//         printf("%d \t\t %d\n", i, dist[i]);
-// }
+double Map::minDistance(double dist[], bool visited[], MapNode & curr)
+{
+    // Initialize min value
+    double min = INT_MAX, min_index;
+    // iterate through the routes 
+    for (unsigned int v = 0; v < curr.nodes.size(); v++){
+        MapNode * temp = &IDTable_[curr.nodes[v]];
+        double distance = Eulerpath(curr.x, curr.y, temp->x, temp->y);
+        if(dist[temp->key] >= distance + curr.currentWeight){
+            dist[temp->key] = distance + curr.currentWeight;
+            temp->currentWeight = dist[temp->key];
+        }
+        if (visited[v] == false && dist[temp->key] <= min)
+            min = dist[temp->key], min_index = temp->key;
+    }
+    return min_index;
+}
+
+void Map::printPath(int parent[], int j){
+    if(parent[j] == -1){
+        return;
+    }
+    printPath(parent, parent[j]);
+    printf("->%d",j);
+}
+
+
+//A utility function to print the constructed distance array
+void Map::printSolution(double dist[], int parent[], int src)
+{
+    printf("Vertex \t\t Distance from Source \t Path \n");
+    for (unsigned int i = 0; i < 1000; i++){
+        if(dist[i] == INT_MAX){
+            //printf("airport doesn't exist\n");
+            continue;
+        }
+        printf("\n %d -> %d \t\t %f \t\t %d", src, i, (dist[i]), src);
+        printPath(parent, src);
+    }
+
+    // for(unsigned int i = 0; i < IDTable_[714].nodes.size(); i++){
+    //     cout << IDTable_[714].nodes[i] << endl;
+    // }
+ }
   
 // Function that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
-// void Map::dijkstra(int src)
-// {
-//     int dist[IDTable_.size()]; // The output array.  dist[i] will hold the shortest
-//     // distance from src to i
+void Map::dijkstra(int src)
+{
+    double dist[V]; // The output array.  dist[i] will hold the shortest
+    // // distance from src to i
   
-//     bool sptSet[IDTable_.size()]; // sptSet[i] will be true if vertex i is included in shortest
-//     // path tree or shortest distance from src to i is finalized
+    bool visited[V]; // visited[i] will be true if vertex i is included in shortest
+    // path tree or shortest distance from src to i is finalized
+    
+    int parent[V]; //Parent array to store shortest path tree
+
+    // Initialize all distances as INFINITE and stpSet[] as false
+    for (int i = 0; i < V; i++) {
+       dist[i] = INT_MAX, visited[i] = false;
+       parent[src] = -1;
+    }
+    // Distance of source vertex from itself is always 0
+    IDTable_[src].currentWeight = 0;
+    dist[src] = 0;
+
   
-//     // Initialize all distances as INFINITE and stpSet[] as false
-//     for (int i = 0; i < IDTable_.size(); i++)
-//         dist[i] = -1, sptSet[i] = false;
+    // Find shortest path for all vertices
+    for(int airID = 0; airID < V-1; airID++){ //curr airport node
+    //for (unsigned int count = 0; count != V - 1; count++) {
+        // Pick the minimum distance vertex from the set of vertices not
+        // yet processed. u is always equal to src in the first iteration.
+        MapNode & curr = IDTable_[airID];
+    
+        int u = minDistance(dist, visited, IDTable_[airID]); //min distance from first airport node
+        //MapNode &pickedcurr = IDTable_[u];
+        // Mark the picked vertex as processed
+        visited[u] = true;
   
-//     // Distance of source vertex from itself is always 0
-//     dist[src] = 0;
+        // Update dist value of the adjacent vertices of the picked vertex.
+        
+        for (unsigned int v = 0; v < curr.nodes.size(); v++){ //size of routes available from current airport
   
-//     // Find shortest path for all vertices
-//     for (int count = 0; count < IDTable_.size() - 1; count++) {
-//         // Pick the minimum distance vertex from the set of vertices not
-//         // yet processed. u is always equal to src in the first iteration.
-//         int u = minDistance(dist, sptSet);
+            // Update dist[v] only if is not in visited, there is an edge from
+            // u to v, and total weight of path from src to  v through u is
+            // smaller than current value of dist[v]
+          // int mindist = minDistance(dist, visited, pickedcurr);
+
+        //    if (!visited[v] && mindist != INT_MAX
+        //         && mindist + pickedcurr.nodes[v].currentWeight < curr.nodes[v].currentWeight){
+        //         dist[v] = dist[u] + graph[u][v];
+        //         }    
+            if (curr.nodes[v] == u) {
+                MapNode * temp2 = &IDTable_[curr.nodes[v]];
+                MapNode * temp3 = &IDTable_[u];
+                double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
+                if (!visited[v]  && dist[u] != INT_MAX && dist[u] + newDist < dist[temp2->key]) {
+                    parent[temp2->key] = temp3->key;
+                    dist[temp2->key] = dist[u] + newDist;
+                    temp2->currentWeight = dist[temp2->key];
+                    //test
+                }
+            }
+        }
+    }
   
-//         // Mark the picked vertex as processed
-//         sptSet[u] = true;
-  
-//         // Update dist value of the adjacent vertices of the picked vertex.
-//         for (int v = 0; v < V; v++)
-  
-//             // Update dist[v] only if is not in sptSet, there is an edge from
-//             // u to v, and total weight of path from src to  v through u is
-//             // smaller than current value of dist[v]
-//             if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX
-//                 && dist[u] + graph[u][v] < dist[v])
-//                 dist[v] = dist[u] + graph[u][v];
-//     }
-  
-//     // print the constructed distance array
-//     printSolution(dist);
-// }
+    // print the constructed distance array
+    printSolution(dist, parent, src);
+}
+
+
 
 
 
