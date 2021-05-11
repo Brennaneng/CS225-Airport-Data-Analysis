@@ -17,7 +17,7 @@
 //and then access this vector, and alter the png image for the corresponding month
 
 
-
+using namespace std;
 
 //One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
 Map::Map(){
@@ -46,27 +46,75 @@ Map::~Map(){
    //~IDTable_;
 }
 
-void Map::findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile) {
+void Map::printSCC(vector<int> low, vector<vector<string>> file) {
+    for(int i = 0; i<low.size(); i++) {
+        cout<<file[i][1]<<" is part of Super Node: "<< low[i]<< endl;
+    }
+};
+
+vector<int> Map::findSCC(vector<vector<string>> file) {
     // # of nodes = airports
     int n = file.size();
     // # SCC's found
+    id = 0;
     int sccCount = 0;
     // # i in the vector represents the airport in index i in the file
     ids.resize(n,-1);
     low.resize(n,0);
     onStack.resize(n,false);
 
-    cout <<onStack.size()<<"hey"<<endl;
-    stack<int> stack;
-
-    // for(int i = 0; i < n; i++) {
-    //     if(ids[i] == -1){
-    //         dfs(i)
-    //     }
-    // }
-    //return low;
+    for(int i = 0; i < n; i++) {
+        if(ids[i] == -1){
+            dfs(i,file);
+        }
+    }
+    printSCC(low,file);
+    return low;
 };
+void Map::dfs(int i, vector<vector<string>> file) {
+    mystack.push(i);
+    onStack[i] = true;
+    ids[i] = id;
+    low[i] = ids[i];
+    id++;
+    //Get the id from the corresponding node from the file. Turn the string into an int.
+    string airportid = file[i][0];
+    int airID = stoi(airportid);
+    //Search for the node in the table;
+    MapNode airport = IDTable_.find(airID);
+    for(int x : airport.nodes) {
+        // find the index of the ID in the file vector;
+        int index = 0;
+        for(unsigned int j = 0; j < file.size(); j++) {
+            if(to_string(x) == file[j][0]) {
+                break;
+            }
+            index++;
+        }
 
+        if(ids[index] == -1) {
+            dfs(index,file);
+        }
+        if(onStack[index]){
+            low[i] = min(low[i],low[index]);
+        }
+
+        //After having visited all the neighbours of 'i'
+        //if we're at the start of the SCC empty the seen
+        //stack until we're back to the start of the SCC
+        if(ids[i] == low[i]){
+            while(!mystack.empty()) {
+                onStack[mystack.top()] = false;
+                low[mystack.top()] = ids[i];
+                if(mystack.top() == i) {
+                    break;
+                }
+                mystack.pop();
+            }
+            sccCount++;
+        }
+    }
+};
 void Map::printName(int ID){
     //this prints the corresponding airport to the ID if it exists
     if(!IDTable_.keyExists(ID)){

@@ -68,10 +68,10 @@ vector<vector<string>> read_file() {
                 line.push_back(datapoint);
             }
             //uncomment this if you want to select a specific country
-            // if(line[2] == "Germany"){
+            // if(line[2] == "Peru"){
             //     TotalFile.push_back(line);
             // }
-            //uncomment this if you want all airports
+            // uncomment this if you want all airports
             vector<string> temp;
             temp.push_back(line[0]);
             temp.push_back(line[1]);

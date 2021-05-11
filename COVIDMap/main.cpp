@@ -54,7 +54,7 @@ int main() {
         vector<vector<string>> file = read_file();
         vector<pair<int,int>> routeFile = read_routes();
         Map airports(file, routeFile);
-        airports.findSCC(file, routeFile);
+        vector<int> l = airports.findSCC(file);
         // airports.printAirports();
         // airports.printName(100);
         // airports.printName(3599);

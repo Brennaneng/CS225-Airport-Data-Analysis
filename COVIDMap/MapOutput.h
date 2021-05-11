@@ -10,6 +10,7 @@
 #include <list>
 #include <algorithm>
 #include "lphashtable.h"
+#include <stack>
 
 using namespace functions;
 using namespace std;
@@ -41,11 +42,17 @@ class Map{
 
     void findPath(int startID, int finalID);
 
-    void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
-        
+    vector<int> findSCC(vector<vector<string>> file);
+
+    void dfs(int i, vector<vector<string>> file);      
+
+    void printSCC(vector<int> low, vector<vector<string>> file);  
+    
     // int minDistance(int dist[], bool sprSet[]);
     // void dijkstra(int src);
     // void printSolution(int dist[]);
+    int sccCount;
+    
 
     private:
 
@@ -59,7 +66,6 @@ class Map{
         double x;
         double y;
         int prev;
-        int sCC;
 
         /**
          * Node constructor; sets children to point to `NULL`.
@@ -67,11 +73,11 @@ class Map{
          * @param newValue The templated data element that the constructed
          *  node will hold.
          */
-        MapNode(const int& newKey, const string& newValue, int lat, int lon)
+        MapNode(const int& newKey, const string& newValue, double lat, double lon)
             : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
         {
         }
-        MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1), y(-1), prev(-1)
+        MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1.0), y(-1.0), prev(-1)
         {}
     };
 
@@ -83,9 +89,11 @@ class Map{
     vector<int> hasVisited_;
 
     vector<pair<int,int>> routes_;
-    
+
     // variables used for SCC
     vector<int> ids;
     vector<int> low;
     vector<bool> onStack;
+    stack<int> mystack;
+    int id;   
 };
