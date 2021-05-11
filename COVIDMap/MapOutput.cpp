@@ -47,9 +47,8 @@ Map::~Map(){
    //~IDTable_;
 }
 
-<<<<<<< HEAD
 void Map::printSCC(vector<int> low, vector<vector<string>> file) {
-    for(int i = 0; i<low.size(); i++) {
+    for(unsigned int i = 0; i<low.size(); i++) {
         cout<<file[i][1]<<" is part of Super Node: "<< low[i]<< endl;
     }
 };
@@ -59,7 +58,7 @@ vector<int> Map::findSCC(vector<vector<string>> file) {
     int n = file.size();
     // # SCC's found
     id = 0;
-    int sccCount = 0;
+    //int sccCount = 0;
     // # i in the vector represents the airport in index i in the file
     ids.resize(n,-1);
     low.resize(n,0);
@@ -93,28 +92,6 @@ void Map::dfs(int i, vector<vector<string>> file) {
             }
             index++;
         }
-=======
-// void Map::findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile) {
-//     // # of nodes = airports
-//     int n = file.size();
-//     // # SCC's found
-//     int sccCount = 0;
-//     // # i in the vector represents the airport in index i in the file
-//     ids.resize(n,-1);
-//     low.resize(n,0);
-//     onStack.resize(n,false);
-
-//     cout <<onStack.size()<<"hey"<<endl;
-//     stack<int> stack;
-
-//     // for(int i = 0; i < n; i++) {
-//     //     if(ids[i] == -1){
-//     //         dfs(i)
-//     //     }
-//     // }
-//     //return low;
-// };
->>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
 
         if(ids[index] == -1) {
             dfs(index,file);
@@ -298,7 +275,7 @@ double Map::minDistance(double dist[], bool visited[], MapNode & curr)
             dist[temp->key] = distance + curr.currentWeight;
             temp->currentWeight = dist[temp->key];
         }
-        if (visited[v] == false && dist[temp->key] <= min)
+        if (visited[temp->key] == false && dist[temp->key] <= min)
             min = dist[temp->key], min_index = temp->key;
     }
     return min_index;
@@ -317,7 +294,7 @@ void Map::printPath(int parent[], int j){
 void Map::printSolution(double dist[], int parent[], int src)
 {
     printf("Vertex \t\t Distance from Source \t Path \n");
-    for (unsigned int i = 0; i < 1000; i++){
+    for (unsigned int i = 0; i < V-1; i++){
         if(dist[i] == INT_MAX){
             //printf("airport doesn't exist\n");
             continue;
@@ -346,7 +323,7 @@ void Map::dijkstra(int src)
     // Initialize all distances as INFINITE and stpSet[] as false
     for (int i = 0; i < V; i++) {
        dist[i] = INT_MAX, visited[i] = false;
-       parent[src] = -1;
+       parent[i] = -1;
     }
     // Distance of source vertex from itself is always 0
     IDTable_[src].currentWeight = 0;
@@ -382,9 +359,9 @@ void Map::dijkstra(int src)
                 MapNode * temp2 = &IDTable_[curr.nodes[v]];
                 MapNode * temp3 = &IDTable_[u];
                 double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
-                if (!visited[v]  && dist[u] != INT_MAX && dist[u] + newDist < dist[temp2->key]) {
+                if (!visited[temp2->key]  && dist[temp3->key] != INT_MAX && dist[temp3->key] + newDist < dist[temp2->key]) {
                     parent[temp2->key] = temp3->key;
-                    dist[temp2->key] = dist[u] + newDist;
+                    dist[temp2->key] = dist[temp3->key] + newDist;
                     temp2->currentWeight = dist[temp2->key];
                     //test
                 }

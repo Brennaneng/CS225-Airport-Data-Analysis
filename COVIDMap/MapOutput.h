@@ -43,24 +43,16 @@ class Map{
 
     void findPath(int startID, int finalID);
 
-<<<<<<< HEAD
     vector<int> findSCC(vector<vector<string>> file);
 
     void dfs(int i, vector<vector<string>> file);      
 
     void printSCC(vector<int> low, vector<vector<string>> file);  
-    
-    // int minDistance(int dist[], bool sprSet[]);
-    // void dijkstra(int src);
-    // void printSolution(int dist[]);
-    int sccCount;
-    
-=======
-    void findSCC(vector<vector<string>> file, vector<pair<int,int>> routeFile);
-    void printPath(int parent[], int j);
     void dijkstra(int src);
     void printSolution(double dist[], int parent[], int src);
->>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
+    void printPath(int parent[], int j);
+    int sccCount;
+    
 
     private:
 
@@ -102,10 +94,7 @@ class Map{
     vector<int> ids;
     vector<int> low;
     vector<bool> onStack;
-<<<<<<< HEAD
     stack<int> mystack;
     int id;   
-=======
     //test
->>>>>>> 8c4b6fce6fa91cb4b706e19e9c61b5934ce35b86
 };
