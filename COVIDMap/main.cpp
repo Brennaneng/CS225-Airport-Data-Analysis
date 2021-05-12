@@ -55,7 +55,8 @@ int main() {
         vector<pair<int,int>> routeFile = read_routes();
         Map airports(file, routeFile);
         //vector<int> l = airports.findSCC(file);
-        airports.dijkstra(3830);
+        //airports.dijkstra(3830);
+        airports.dijkstra(3830, 3000);
         //airports.findSCC(file, routeFile);
         // airports.printAirports();
         // airports.printName(100);

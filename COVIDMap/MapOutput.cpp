@@ -315,8 +315,55 @@ void Map::dijkstra(int src)
         printf("%d -> %d \t %f \t %d",src, i, dist[i], src);
         printPath(parent,i);
         printf("->arrived\t");
-        cout<< IDTable_[src].value << " goes to " << IDTable_[i].value << endl;
+        cout<< IDTable_[src].value << " has the shortest route to " << IDTable_[i].value << endl;
         }
     }
 
+}
+
+
+void Map::dijkstra(int src, int des)
+{
+    double dist[V]; // The output array.  dist[i] will hold the shortest
+    // // distance from src to i
+    
+    int parent[V]; //Parent array to store shortest path tree
+
+    // Initialize all distances as INFINITE and stpSet[] as false
+    for (int i = 0; i < V; i++) {
+       dist[i] = INT_MAX;
+       parent[i] = -1;
+    }
+    // Distance of source vertex from itself is always 0
+    IDTable_[src].currentWeight = 0;
+    dist[src] = 0;
+    priority_queue<pair<double,int>, vector<pair<double,int>>, greater<pair<double,int>>> mypq;
+    mypq.push(make_pair(0,src));
+    
+    while(!mypq.empty()){
+        int u = mypq.top().second;
+        mypq.pop();
+        MapNode * tempid = &IDTable_[u];
+        for(unsigned int i = 0; i < tempid->nodes.size(); i++){
+            MapNode * temp = &IDTable_[tempid->nodes[i]];
+            int id = temp->key;
+            int distance = Eulerpath(tempid->y, tempid->x, temp->y, temp->x);
+            if(dist[id] > dist[u] + distance){
+                parent[id] = u;
+                dist[id] = dist[u] + distance;
+                mypq.push(make_pair(dist[id], id));
+            }
+        }
+    }
+
+    printf("Airport ID  Distance from Source    Path\n");
+    if(dist[des] != INT_MAX){
+        printf("%d -> %d \t %f \t %d",src, des, dist[des], src);
+        printPath(parent,des);
+        printf("->arrived\t");
+        cout<< IDTable_[src].value << " has the shortest route to " << IDTable_[des].value << endl;
+        }
+    else{
+        cout<< IDTable_[src].value << " has no route available to " << IDTable_[des].value << " sorry! " << endl;
+    }
 }
