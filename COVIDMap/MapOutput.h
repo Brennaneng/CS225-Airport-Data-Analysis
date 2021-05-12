@@ -74,7 +74,7 @@ class Map{
          *  node will hold.
          */
         MapNode(const int& newKey, const string& newValue, double lat, double lon)
-            : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
+            : key(newKey), value(newValue), currentWeight(-1), x(lon), y(lat), prev(-1)
         {
         }
         MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1.0), y(-1.0), prev(-1)

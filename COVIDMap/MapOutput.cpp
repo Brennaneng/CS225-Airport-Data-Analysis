@@ -244,9 +244,7 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
     double dlong = long2 - long1;
     double dlat = lat2 - lat1;
  
-    double ans = pow(sin(dlat / 2), 2) +
-                          cos(lat1) * cos(lat2) *
-                          pow(sin(dlong / 2), 2);
+    double ans = pow(sin(dlat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dlong / 2), 2);
  
     ans = 2 * asin(sqrt(ans));
  
@@ -294,15 +292,14 @@ void Map::printPath(int parent[], int j){
 void Map::printSolution(double dist[], int parent[], int src)
 {
     printf("Vertex \t\t Distance from Source \t Path \n");
-    for (unsigned int i = 0; i < V-1; i++){
+    for (unsigned int i = 0; i < 5000; i++){
         if(dist[i] == INT_MAX){
             //printf("airport doesn't exist\n");
             continue;
         }
         printf("\n %d -> %d \t\t %f \t\t %d", src, i, (dist[i]), src);
-        printPath(parent, src);
+        printPath(parent, i);
     }
-
     // for(unsigned int i = 0; i < IDTable_[714].nodes.size(); i++){
     //     cout << IDTable_[714].nodes[i] << endl;
     // }
@@ -315,122 +312,45 @@ void Map::dijkstra(int src)
     double dist[V]; // The output array.  dist[i] will hold the shortest
     // // distance from src to i
   
-    bool visited[V]; // visited[i] will be true if vertex i is included in shortest
-    // path tree or shortest distance from src to i is finalized
+    // bool visited[V]; // visited[i] will be true if vertex i is included in shortest
+    // // path tree or shortest distance from src to i is finalized
     
-    int parent[V]; //Parent array to store shortest path tree
+    // int parent[V]; //Parent array to store shortest path tree
 
     // Initialize all distances as INFINITE and stpSet[] as false
     for (int i = 0; i < V; i++) {
-       dist[i] = INT_MAX, visited[i] = false;
-       parent[i] = -1;
+       dist[i] = INT_MAX;
+       //visited[i] = false;
+       //parent[i] = -1;
     }
     // Distance of source vertex from itself is always 0
+    //visited[src] = true;
     IDTable_[src].currentWeight = 0;
     dist[src] = 0;
-
-  
-    // Find shortest path for all vertices
-    for(int airID = 0; airID < V-1; airID++){ //curr airport node
-    //for (unsigned int count = 0; count != V - 1; count++) {
-        // Pick the minimum distance vertex from the set of vertices not
-        // yet processed. u is always equal to src in the first iteration.
-        MapNode & curr = IDTable_[airID];
+    priority_queue<pair<double,int>, vector<pair<double,int>>, greater<pair<double,int>>> mypq;
+    mypq.push(make_pair(0,src));
     
-        int u = minDistance(dist, visited, IDTable_[airID]); //min distance from first airport node
-        //MapNode &pickedcurr = IDTable_[u];
-        // Mark the picked vertex as processed
-        visited[u] = true;
-  
-        // Update dist value of the adjacent vertices of the picked vertex.
-        
-        for (unsigned int v = 0; v < curr.nodes.size(); v++){ //size of routes available from current airport
-  
-            // Update dist[v] only if is not in visited, there is an edge from
-            // u to v, and total weight of path from src to  v through u is
-            // smaller than current value of dist[v]
-          // int mindist = minDistance(dist, visited, pickedcurr);
-
-        //    if (!visited[v] && mindist != INT_MAX
-        //         && mindist + pickedcurr.nodes[v].currentWeight < curr.nodes[v].currentWeight){
-        //         dist[v] = dist[u] + graph[u][v];
-        //         }    
-            if (curr.nodes[v] == u) {
-                MapNode * temp2 = &IDTable_[curr.nodes[v]];
-                MapNode * temp3 = &IDTable_[u];
-                double newDist = Eulerpath(temp2->x, temp2->y, temp3->x, temp3->y);
-                if (!visited[temp2->key]  && dist[temp3->key] != INT_MAX && dist[temp3->key] + newDist < dist[temp2->key]) {
-                    parent[temp2->key] = temp3->key;
-                    dist[temp2->key] = dist[temp3->key] + newDist;
-                    temp2->currentWeight = dist[temp2->key];
-                    //test
-                }
+    while(!mypq.empty()){
+        int u = mypq.top().second;
+        mypq.pop();
+        MapNode * tempid = &IDTable_[u];
+        for(unsigned int i = 0; i < tempid->nodes.size(); i++){
+            MapNode * temp = &IDTable_[tempid->nodes[i]];
+            int id = temp->key;
+            int distance = Eulerpath(tempid->y, tempid->x, temp->y, temp->x);
+            if(dist[id] > dist[u] + distance){
+                dist[id] = dist[u] + distance;
+                mypq.push(make_pair(dist[id], id));
             }
         }
     }
-  
-    // print the constructed distance array
-    printSolution(dist, parent, src);
+
+
+    printf("Airport ID  Distance from Source\n");
+    for(unsigned int i = 0; i < V; ++i){
+        if(dist[i] != INT_MAX){
+        printf("%d -> %d \t\t %f\n",src, i, dist[i]);
+        }
+    }
+
 }
-
-
-
-
-
-
-// }
-/*
-void Map::insertStates()
-{
-States = new vector<string> ({"AK",
-"AL",
-"AR",
-"AZ",
-"CA",
-"CO",
-"CT",
-"DE",
-"FL",
-"GA",
-"HI",
-"IA",
-"ID",
-"IL",
-"IN",
-"KS",
-"KY",
-"LA",
-"MA",
-"MD",
-"ME",
-"MI",
-"MN",
-"MO",
-"MS",
-"MT",
-"NC",
-"ND",
-"NE",
-"NH",
-"NJ",
-"NM",
-"NV",
-"NY",
-"OH",
-"OK",
-"OR",
-"PA",
-"RI",
-"SC",
-"SD",
-"TN",
-"TX",
-"UT",
-"VA",
-"VT",
-"WA",
-"WI",
-"WV",
-"WY"});
-}
-};*/
