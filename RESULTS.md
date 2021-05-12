@@ -22,6 +22,8 @@
         int prev;
     };
     ```
+    ![Hashtable Output](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/hashtable.JPG)
+
 * **BFS traversal: findPath(int startID, int finalID):**
 	* For the traversal of our final project, we decided on BFS to find a path from a source airport to a destination airport. It starts by using a queue in order to continually add new routes onto the queue based on new airports and their routes. findPath first initializes itself with the source airport which in this case would be 100 for the example on the left. The end destination goal would be the airport code 3599. Until the program encounters airport code 3599 it will continue to search the Map with BFS traversal. To read the output, the first line the terminal will see is the destination and it will be read backwards. In the image on the left of our test output, the program starts with 100 on the very bottom left and traverses up until it reaches the second image on the right and it will traverse with BFS until it reaches 3599. This method was successful in providing the user in finding one path between a source airport and a destination airport.
 
@@ -32,6 +34,7 @@
     Map airports(file, routeFile);
     airports.findPath(100,3599);
     ```
+    ![BFS Output](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/table.JPG)
 * **Dijkstra’s Algorithm: dijkstras(int src, int des):**
 	* Dijkstra’s is similar to BFS in that it traverses the MapNodes with a queue except the queue we implemented is a priority queue which in the way we manipulated the values, popped off the smallest value from the top and it continually sorts the integer values based on the distance between an airport the program is looking at and a route it can take. By self-regulating the paths available for the program to take, our program creates a greedy algorithm which finds the shortest path available to it and continually traverses until all airports have been exhausted. Once the program has been exhausted all values such as the parent of those airports, and the minimum distance to one of its routes. The output of Dijkstra’s can be found below on the right which shows the same source and destination airport as the BFS program discussed above, but a much shorter version. It also prints out the distance as well as the specific path it takes to get to the destination. Ultimately we test this path by looking at available routes as we went manually and by calculating the distance with the Euler’s path formula to accommodate the spherical coordinates of airports.
 
@@ -42,6 +45,8 @@
     Map airports(file, routeFile);
     airports.dijkstra(100, 3599);
     ```
+    ![Dijkstra's Output](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/dijoutput.JPG)
+
 * **Strongly Connected Components: findSCC(vector<vector<string>>file):**
     * In order to be categorized as a Strongly Connected Graph every node in a directed graph must be reachable from every other node. Similarly, Strongly Connected Components of a graph are subgraphs of the main directed graph which are themselves strongly connected. This algorithm begins in any arbitrary node in the graph and makes a vector “low” which will be used  to store the supernode number of the node. The index in the vector “low” will correspond to the airport in the same index of the vector “file”. In order to traverse the directed graph the algorithm uses DFS (Depth-First Search) which allows the visit of each node exactly once. As the search traverses the graph, each node is accessed and added to a stack. The node is accessed and its respective route vector is accessed. This vector points to other nodes and therefore we can access other nodes from the vector. As we search through every node, we also check if the visited node is in the stack. If the node appears in the stack, the algorithm has found a loop which means that the nodes in the loop can access each other starting from any of those respective nodes. The nodes are all given the index value of the smallest node in the vector “low”. This means that the node in a corresponding index of “file” will belong to the group number depicted in the value of the index in “low”. 
 
@@ -53,7 +58,7 @@
     airports.findSCC(file, routeFile);
     ```
 
-
+    ![SCC Output](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/supernode.JPG)
 
 
 
