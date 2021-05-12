@@ -22,9 +22,9 @@
 1. **Log for 4/19/2021** 
     * Edson managed to finish coordinates and started working on the severity tolerances of the states
 
-    * Jorge
+    * Jorge finished the AVL tree data entry
 
-    * Miguel
+    * Miguel also worked on the AVL data entry
 
     * Brennan worked on finishing readfile in addition to the new sorted vector to sort the raw data vector
 
@@ -43,4 +43,8 @@
     As of today our group has finished the hash table function to better compress our data so our ews computer can run it. We have finished the BFS algorithm that traverses through the hash table to find **a** route from one destination to another. Miguel is still continuing to work on Strongly connected components so that we can see supernodes of certain airports. Dijkstras is almost finished but we are running into some cases where the algorithm does not calculate properly.
 
 1. **Log for 5/9/2021**
-    Brennan and Edson are continuing to work on Dijkstras
+    Brennan and Edson are continuing to work on Dijkstras. We are having trouble with our current implementation and currently we are working on minDistance which calculates the current minimum distance based on the routes available.
+    Miguel and Jorge are continuing to work on strongly connected components and are close to finishing.
+
+1. **Log for 5/11/2021**
+    As of right now, Brennan and Edson has finished Dijkstras and refined the output stream for it. Jorge and Miguel have both finished Strongly Connected Components and have the refined output stream for it. Both algorithms completed as well as the BFS algorithm made by Jorge with an inputted source airport and outputted source airport. All algorithms done so what needs to be done tomorrow at the due date is finish up the video as well as the README.md file.
