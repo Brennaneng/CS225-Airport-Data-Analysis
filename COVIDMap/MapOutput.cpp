@@ -260,25 +260,6 @@ double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
     return ans;
 };
 
-
-double Map::minDistance(double dist[], bool visited[], MapNode & curr)
-{
-    // Initialize min value
-    double min = INT_MAX, min_index;
-    // iterate through the routes 
-    for (unsigned int v = 0; v < curr.nodes.size(); v++){
-        MapNode * temp = &IDTable_[curr.nodes[v]];
-        double distance = Eulerpath(curr.x, curr.y, temp->x, temp->y);
-        if(dist[temp->key] >= distance + curr.currentWeight){
-            dist[temp->key] = distance + curr.currentWeight;
-            temp->currentWeight = dist[temp->key];
-        }
-        if (visited[temp->key] == false && dist[temp->key] <= min)
-            min = dist[temp->key], min_index = temp->key;
-    }
-    return min_index;
-}
-
 void Map::printPath(int parent[], int j){
     if(parent[j] == -1){
         return;
@@ -288,22 +269,6 @@ void Map::printPath(int parent[], int j){
 }
 
 
-//A utility function to print the constructed distance array
-void Map::printSolution(double dist[], int parent[], int src)
-{
-    printf("Vertex \t\t Distance from Source \t Path \n");
-    for (unsigned int i = 0; i < 5000; i++){
-        if(dist[i] == INT_MAX){
-            //printf("airport doesn't exist\n");
-            continue;
-        }
-        printf("\n %d -> %d \t\t %f \t\t %d", src, i, (dist[i]), src);
-        printPath(parent, i);
-    }
-    // for(unsigned int i = 0; i < IDTable_[714].nodes.size(); i++){
-    //     cout << IDTable_[714].nodes[i] << endl;
-    // }
- }
   
 // Function that implements Dijkstra's single source shortest path algorithm
 // for a graph represented using adjacency matrix representation
@@ -311,20 +276,15 @@ void Map::dijkstra(int src)
 {
     double dist[V]; // The output array.  dist[i] will hold the shortest
     // // distance from src to i
-  
-    // bool visited[V]; // visited[i] will be true if vertex i is included in shortest
-    // // path tree or shortest distance from src to i is finalized
     
-    // int parent[V]; //Parent array to store shortest path tree
+    int parent[V]; //Parent array to store shortest path tree
 
     // Initialize all distances as INFINITE and stpSet[] as false
     for (int i = 0; i < V; i++) {
        dist[i] = INT_MAX;
-       //visited[i] = false;
-       //parent[i] = -1;
+       parent[i] = -1;
     }
     // Distance of source vertex from itself is always 0
-    //visited[src] = true;
     IDTable_[src].currentWeight = 0;
     dist[src] = 0;
     priority_queue<pair<double,int>, vector<pair<double,int>>, greater<pair<double,int>>> mypq;
@@ -339,6 +299,7 @@ void Map::dijkstra(int src)
             int id = temp->key;
             int distance = Eulerpath(tempid->y, tempid->x, temp->y, temp->x);
             if(dist[id] > dist[u] + distance){
+                parent[id] = u;
                 dist[id] = dist[u] + distance;
                 mypq.push(make_pair(dist[id], id));
             }
@@ -346,10 +307,15 @@ void Map::dijkstra(int src)
     }
 
 
-    printf("Airport ID  Distance from Source\n");
+    printf("Airport ID  Distance from Source    Path\n");
+    // cout<< IDTable_[src].value << endl;
+    // cout<< parent[src] << endl;
     for(unsigned int i = 0; i < V; ++i){
         if(dist[i] != INT_MAX){
-        printf("%d -> %d \t\t %f\n",src, i, dist[i]);
+        printf("%d -> %d \t %f \t %d",src, i, dist[i], src);
+        printPath(parent,i);
+        printf("->arrived\t");
+        cout<< IDTable_[src].value << " goes to " << IDTable_[i].value << endl;
         }
     }
 
