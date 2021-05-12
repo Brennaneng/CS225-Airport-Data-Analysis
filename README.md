@@ -46,7 +46,7 @@
 
     * https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
 
-After cloning the repository you will follow these commands:
+* After cloning the repository you will follow these commands:
 
     * To access the correct files you will have to run $ cd alpizar2-bheng2-jorgejc2-miguel5/COVIDMap in the terminal 
 
@@ -54,7 +54,7 @@ After cloning the repository you will follow these commands:
 
     * Next you will look through lines "" - "" of main.cpp to see what test cases you want to run :
 
-After finding the test case you want to test you will: 
+* After finding the test case you want to test you will: 
 
     * Find a specific airport. You can open the airport_fitered.csv file with your preferred source code editor and find a specific airport ID and destination ID there. 
 
