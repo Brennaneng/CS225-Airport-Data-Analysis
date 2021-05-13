@@ -48,17 +48,16 @@ Map::~Map(){
 }
 
 void Map::printSCC(vector<int> low, vector<vector<string>> file) {
-    for(unsigned int i = 0; i<low.size(); i++) {
-        cout<<file[i][1]<<" is part of Super Node: "<< low[i]<< endl;
-    }
+    //for(unsigned int i = 0; i<low.size(); i++) {
+      //  cout<<file[i][1]<<" is part of Super Node: "<< low[i]<< endl;
+    //}
 };
 
 vector<int> Map::findSCC(vector<vector<string>> file) {
     // # of nodes = airports
     int n = file.size();
-    // # SCC's found
+    // # ID's
     id = 0;
-    //int sccCount = 0;
     // # i in the vector represents the airport in index i in the file
     ids.resize(n,-1);
     low.resize(n,0);
@@ -76,21 +75,21 @@ void Map::dfs(int i, vector<vector<string>> file) {
     mystack.push(i);
     onStack[i] = true;
     ids[i] = id;
-    low[i] = ids[i];
+    low[i] = id;
     id++;
     //Get the id from the corresponding node from the file. Turn the string into an int.
     string airportid = file[i][0];
     int airID = stoi(airportid);
     //Search for the node in the table;
     MapNode airport = IDTable_.find(airID);
+
     for(int x : airport.nodes) {
         // find the index of the ID in the file vector;
         int index = 0;
         for(unsigned int j = 0; j < file.size(); j++) {
-            if(to_string(x) == file[j][0]) {
-                break;
+            if(file[j][0] == to_string(x)) {
+                index = j;
             }
-            index++;
         }
 
         if(ids[index] == -1) {
@@ -99,21 +98,20 @@ void Map::dfs(int i, vector<vector<string>> file) {
         if(onStack[index]){
             low[i] = min(low[i],low[index]);
         }
-
-        //After having visited all the neighbours of 'i'
-        //if we're at the start of the SCC empty the seen
-        //stack until we're back to the start of the SCC
-        if(ids[i] == low[i]){
-            while(!mystack.empty()) {
-                onStack[mystack.top()] = false;
-                low[mystack.top()] = ids[i];
-                if(mystack.top() == i) {
-                    break;
-                }
-                mystack.pop();
+    }
+    //After having visited all the neighbours of 'i'
+    //if we're at the start of the SCC empty the seen
+    //stack until we're back to the start of the SCC
+    if(ids[i] == low[i]){
+        while(!mystack.empty()) {
+            onStack[mystack.top()] = false;
+            low[mystack.top()] = ids[i];
+            if(mystack.top() == i) {
+                break;
             }
-            sccCount++;
+            mystack.pop();
         }
+        sccCount++;
     }
 };
 void Map::printData(int ID){

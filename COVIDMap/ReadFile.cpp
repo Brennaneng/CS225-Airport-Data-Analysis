@@ -138,7 +138,7 @@ vector<vector<string>> read_file() {
     ifstream file;
 
     //opens file to be read
-    file.open("airports_fitered.csv");
+    file.open("airports_filtered.csv");
 
     //Created two vectors, TotalFile creates a vector of vectors that takes in each row called a vector datapoint
     //datapoint creates a set of values enumerated by ',' which means each index of the datapoint will be date, state, and deaths
