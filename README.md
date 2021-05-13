@@ -52,11 +52,11 @@
 
     * You will then open main.cpp with your preferred source code editor. 
 
-    * Next you will look through lines "" - "" of main.cpp to see what test cases you want to run :
+    * Next you will look through lines "78" - "141" of main.cpp to see what test cases you want to run :
 
 * After finding the test case you want to test you will:
 
-    * You then will go to your terminal and type $ make && ./COVIDMap TEST# (where # is the test case number) just like the image below.
+    * Go to your terminal and type $ make && ./COVIDMap TEST# (where # is the test case number) just like the image below.
 
         ![example](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/test.JPG)
 
