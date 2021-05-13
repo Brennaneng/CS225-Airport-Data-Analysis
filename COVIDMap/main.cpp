@@ -110,11 +110,35 @@ int main(int argc, char** param) {
     }
     else if (alg == "TEST5") {
         Map test5(file_test, routeFile_test);
-        test5.dijkstra(2, 10);
-        // if (310*0.95 < Dij.IDTable_[5] < 310*1.05) {
-        //     cout << "Answer is within tolerance" << endl;
-        // }
+        
+        double temp = test5.dijkstra(2, 5);
+        if (310*0.95 < temp && temp< 310*1.05) {
+            cout << "Answer is within tolerance" << endl;
+        }
+        else {
+            cout << "Answer is not within tolerance" << endl;
+        }
+    }
+    else if (alg == "TEST6") {
+        Map test6(file_test, routeFile_test);
+        double temp = test6.dijkstra(2, 10);
+        if (5650.79 * 0.95 < temp && temp < 5650.79 * 1.05) {
+            cout << "Answer is within tolerance" << endl;
+        }
+        else {
+            cout << "Answer is not within tolerance" << endl;
+        }
+    }
+    else if (alg == "TEST7") {
+        Map test7(file_test, routeFile_test);
 
+        double temp = test7.dijkstra(2, 4);
+        if ( 148.7 * 0.95 < temp && temp < 148.7  * 1.05) {
+            cout << "EulerPath works" << endl;
+        }
+        else {
+            cout << "EulerPath does not work" << endl;
+        }
     }
     else{
         cout<<"Invalid Algortihm"<<endl;

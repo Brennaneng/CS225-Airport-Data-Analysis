@@ -47,7 +47,7 @@ class Map{
 
     void printSCC(vector<int> low, vector<vector<string>> file);  
     void dijkstra(int src);
-    void dijkstra(int src, int des);
+    double dijkstra(int src, int des);
     void printSolution(double dist[], int parent[], int src);
     void printPath(int parent[], int j);
     int sccCount;
