@@ -108,6 +108,14 @@ int main(int argc, char** param) {
         BFS.findPath(1, 9);
 
     }
+    else if (alg == "TEST5") {
+        Map test5(file_test, routeFile_test);
+        test5.dijkstra(2, 10);
+        // if (310*0.95 < Dij.IDTable_[5] < 310*1.05) {
+        //     cout << "Answer is within tolerance" << endl;
+        // }
+
+    }
     else{
         cout<<"Invalid Algortihm"<<endl;
         return 1;

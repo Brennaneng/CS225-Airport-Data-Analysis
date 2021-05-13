@@ -1,7 +1,7 @@
 #include "MapOutput.h"
 #include <stack>
 
-#define V 14110
+#define V 14111
 //here is where we will create a map object. We will specify what kind of map where are working with meaning
 //that if we want a map for deaths, we create a map object called deaths. If we do a map for deaths, then we will
 //create a tree of states where each value is a vector full of deaths for each month. If we do a map for positive cases, 
