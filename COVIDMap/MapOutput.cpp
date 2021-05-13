@@ -1,7 +1,7 @@
 #include "MapOutput.h"
 #include <stack>
 
-#define V 14110
+#define V 14111
 //here is where we will create a map object. We will specify what kind of map where are working with meaning
 //that if we want a map for deaths, we create a map object called deaths. If we do a map for deaths, then we will
 //create a tree of states where each value is a vector full of deaths for each month. If we do a map for positive cases, 
@@ -122,16 +122,23 @@ void Map::printData(int ID){
         cout<<"ID doesn't exist"<<endl;
         return;
     }
-    cout<<"ID "<<ID<<" is airport "<<IDTable_[ID].value<<endl;
+    cout<<"ID "<<ID<<" is airport "<<IDTable_[ID].value<<" || Lat: "<<IDTable_[ID].x<<" || Long: "<<IDTable_[ID].y<<endl;
+    // cout<<ID<<" points to the airport ID's : ";
+    // for(unsigned i = 0; i < IDTable_[ID].nodes.size(); i++){
+    //     cout<<IDTable_[ID].nodes[i]<<" ";
+    // }
+    // cout<<endl;
 };
 
-void Map::findPath(int startID, int finalID){
+vector<int> Map::findPath(int startID, int finalID){
     //this finds a path between any two IDs using BFS
+    vector<int> path;
 
     //if neither ID exists, then a path cannot exist
     if(!IDTable_.keyExists(startID) || !IDTable_.keyExists(finalID)){
         cout<<"A path does not exist"<<endl;
-        return;
+        path.push_back(-1);
+        return path;
     }
 
     queue<int> traversal;
@@ -169,7 +176,8 @@ void Map::findPath(int startID, int finalID){
     }
     if(!flag){
         cout<<"No path exists"<<endl;
-        return;
+        path.push_back(-1);
+        return path;
     }
     //this prints the path to the terminal
     int from = -1;
@@ -177,10 +185,12 @@ void Map::findPath(int startID, int finalID){
     while(to != startID){
         MapNode &curr = IDTable_[to];
         from = curr.prev;
+        path.push_back(to);
         cout<<"From "<<from<<" to "<<to<<endl;
         to = from;
     }
-
+    reverse(path.begin(),path.end());
+    return path;
 
 };
 
@@ -203,22 +213,14 @@ void Map::readRoutes(vector<pair<int,int>> file){
 void Map::printAirports(){
     for(int i = 0; i < 14111; i++){
         if(IDTable_.keyExists(i)){
-        cout<< "Current airport is "<< IDTable_[i].value<< "     Lat: "<<IDTable_[i].x<<"   Long: "<<IDTable_[i].y<<endl;
+        cout<< "Current airport is "<< IDTable_[i].value<<" || Lat: "<<IDTable_[i].x<<" || Long: "<<IDTable_[i].y<<endl;
         for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
             int connID = IDTable_[i].nodes[j];
             cout<<"--->"<<IDTable_[connID].value<<endl;
         }
-        }
+    }
     }
 };
-
-vector<pair<int,int>> Map::printRoutes(){
-    return routes_;
-};
-
-    
-
-
 
 double Map::toRadians(const double degree)
 {
@@ -228,7 +230,7 @@ double Map::toRadians(const double degree)
     // pi accurate to 1e-30
     double one_deg = (M_PI) / 180;
     return (one_deg * degree);
-}
+};
  
 double Map::Eulerpath(double lat1, double long1, double lat2, double long2){
 

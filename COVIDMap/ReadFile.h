@@ -33,5 +33,7 @@ void clean_data();
 */
 vector<pair<int,int> > read_routes();
 
+vector<vector<string>> read_file_test();
+vector<pair<int,int> > read_routes_test();
 
 };
