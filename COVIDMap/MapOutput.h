@@ -26,11 +26,9 @@ class Map{
     //Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
 
-    void printName(int ID);
+    void printData(int ID);
     
     void printAirports();
-
-    vector<pair<int,int>> printRoutes();
 
     void readRoutes(vector<pair<int,int>> file);
 
@@ -41,7 +39,7 @@ class Map{
 
     void insertStates();
 
-    void findPath(int startID, int finalID);
+    vector<int> findPath(int startID, int finalID);
 
     vector<int> findSCC(vector<vector<string>> file);
 
@@ -75,7 +73,7 @@ class Map{
          *  node will hold.
          */
         MapNode(const int& newKey, const string& newValue, double lat, double lon)
-            : key(newKey), value(newValue), currentWeight(-1), x(lon), y(lat), prev(-1)
+            : key(newKey), value(newValue), currentWeight(-1), x(lat), y(lon), prev(-1)
         {
         }
         MapNode() : key(-1), value("n/a"), currentWeight(-1), x(-1.0), y(-1.0), prev(-1)
