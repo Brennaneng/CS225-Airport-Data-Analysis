@@ -340,7 +340,7 @@ void Map::dijkstra(int src)
 };
 
 
-void Map::dijkstra(int src, int des)
+double Map::dijkstra(int src, int des)
 {
     double dist[V]; // The output array.  dist[i] will hold the shortest
     // // distance from src to i
@@ -384,4 +384,6 @@ void Map::dijkstra(int src, int des)
     else{
         cout<< IDTable_[src].value << " has no route available to " << IDTable_[des].value << " sorry! " << endl;
     }
-};
+
+    return dist[des];
+}
