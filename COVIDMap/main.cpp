@@ -16,7 +16,7 @@ int main(int argc, char** param) {
         cout<<"Good morning, this is our final CS project!"<<endl;
         cout<<"In order to get started, type ./COVIDMap [string algorithm] [int parameter 1] [int parameter 2] in your terminal."<<endl;
         cout<<"The following algorithms can be run:"<<endl;
-        cout<<"SCC, BFS, DIJSKTRA, TEST1, TEST2, TEST3"<<endl;
+        cout<<"SCC, BFS, DIJSKTRA, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7"<<endl;
         cout<<"BFS and DIJSKTRA need at least two integer parameters to run correctly"<<endl;
         cout<<"Have fun testing our code!"<<endl;
         return 1;
