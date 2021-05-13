@@ -48,3 +48,6 @@
 
 1. **Log for 5/11/2021**
     As of right now, Brennan and Edson has finished Dijkstras and refined the output stream for it. Jorge and Miguel have both finished Strongly Connected Components and have the refined output stream for it. Both algorithms completed as well as the BFS algorithm made by Jorge with an inputted source airport and outputted source airport. All algorithms done so what needs to be done tomorrow at the due date is finish up the video as well as the README.md file.
+
+1. **Log for 5/12/2021**
+    We are worked on our corresponding test cases for the graders to read. Edson finished the README.md file while I finished the RESULTS.md outline of each goal and function of how it worked. Jorge and Miguel worked on the main function so that its easier for the grader to test the cases and showcase our built algorithms. We have finished all our parts including making the video and are about to turn everything in.

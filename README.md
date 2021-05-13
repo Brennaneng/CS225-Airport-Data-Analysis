@@ -52,15 +52,17 @@
 
     * You will then open main.cpp with your preferred source code editor. 
 
-    * Next you will look through lines "" - "" of main.cpp to see what test cases you want to run :
+    * Next you will look through lines "78" - "141" of main.cpp to see what test cases you want to run :
 
-* After finding the test case you want to test you will: 
+* After finding the test case you want to test you will:
 
-    * Find a specific airport. You can open the airport_fitered.csv file with your preferred source code editor and find a specific airport ID and destination ID there. 
+    * Go to your terminal and type $ make && ./COVIDMap TEST# (where # is the test case number) just like the image below.
 
-    * You then will go to your terminal and type $ make && ./COVIDMap "name of algorithm" "start ID" "end ID"
+        ![example](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/test.JPG)
 
-    * The algorithm options are "BFS", "DIJKSTRAS", or "SCC". *Disclaimer: the algorithm has to be typed in all caps"
+    * If you want to refer to the map the test case is using refer to the following map. 
+
+        ![example](https://github-dev.cs.illinois.edu/cs225-sp21/alpizar2-bheng2-jorgejc2-miguel5/blob/master/testmap.JPG)
 
     * If you have questions on how to run our test cases you can just run $ ./COVIDMap in the terminal and you will be given more information on how to do so 
 
