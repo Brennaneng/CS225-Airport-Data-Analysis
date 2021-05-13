@@ -34,34 +34,18 @@ struct MapNode {
 
 int main() {
 
-        // LPHashTable<int,MapNode> hello(5);
-        // MapNode temp (1,"mr world wide", 2, 3);
-        // hello.insert(1, temp);
-        // MapNode &curr = hello[1];
-        // curr.value = "not mr world wide >:(";
-        // temp = hello.find(1);
-        // cout<<"ID 1 has a name of "<<temp.value<< endl;
-        // for( int i = 0; i < 14410; i++) {
-        //     if(hello.keyExists(i)) {
-        //         cout <<"----------------------\n";
-        //         cout <<"Index = "<< i << endl;
-        //         cout <<"Airport ID = "<< hello[i].key << endl;
-        //         cout <<"Airport Name = "<< hello[i].value << endl;
-        //         cout <<"Longitude/Latitude = "<< hello[i].x <<"/"<< hello[i].y << endl;
-        //         cout <<"----------------------\n";
-        //     }
-        // }
+        //TEST CASE 1: Map object can take in Airport data and accurately print out the Airport names
         vector<vector<string>> file = read_file();
         vector<pair<int,int>> routeFile = read_routes();
-        Map airports(file, routeFile);
-        //vector<int> l = airports.findSCC(file);
-        //airports.dijkstra(3830);
-        airports.dijkstra(3830, 3000);
-        //airports.findSCC(file, routeFile);
-        // airports.printAirports();
-        // airports.printName(100);
-        // airports.printName(3599);
-        // airports.findPath(100,3599);
+        Map test_one(file, routeFile);
+        test_one.printAirports();
+
+        //TEST CASE 2: Map object can take in Airport data and accurately print out the routes
+
+
+        test_one.printName(100);
+        test_one.printName(3599);
+        test_one.findPath(1250,1278);
 
 
         return 0;

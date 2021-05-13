@@ -22,7 +22,7 @@ using namespace std;
 
 //One function we have to consider is editing the Binary tree as we read in the Dataset. In orders
 Map::Map(){
-    
+
 };
 Map::Map(vector<vector<string>> file, vector<pair<int,int>> routeFile){
     //File is total data.
@@ -116,7 +116,7 @@ void Map::dfs(int i, vector<vector<string>> file) {
         }
     }
 };
-void Map::printName(int ID){
+void Map::printData(int ID){
     //this prints the corresponding airport to the ID if it exists
     if(!IDTable_.keyExists(ID)){
         cout<<"ID doesn't exist"<<endl;
@@ -203,7 +203,7 @@ void Map::readRoutes(vector<pair<int,int>> file){
 void Map::printAirports(){
     for(int i = 0; i < 14111; i++){
         if(IDTable_.keyExists(i)){
-        cout<< "Current airport is "<< IDTable_[i].value<<endl;
+        cout<< "Current airport is "<< IDTable_[i].value<< "     Lat: "<<IDTable_[i].x<<"   Long: "<<IDTable_[i].y<<endl;
         for(unsigned j = 0; j < IDTable_[i].nodes.size(); j++){
             int connID = IDTable_[i].nodes[j];
             cout<<"--->"<<IDTable_[connID].value<<endl;
@@ -266,7 +266,7 @@ void Map::printPath(int parent[], int j){
     }
     printPath(parent, parent[j]);
     printf("->%d",j);
-}
+};
 
 
   
@@ -304,7 +304,7 @@ void Map::dijkstra(int src)
                 mypq.push(make_pair(dist[id], id));
             }
         }
-    }
+    };
 
 
     printf("Airport ID  Distance from Source    Path\n");
@@ -319,7 +319,7 @@ void Map::dijkstra(int src)
         }
     }
 
-}
+};
 
 
 void Map::dijkstra(int src, int des)
@@ -366,4 +366,4 @@ void Map::dijkstra(int src, int des)
     else{
         cout<< IDTable_[src].value << " has no route available to " << IDTable_[des].value << " sorry! " << endl;
     }
-}
+};

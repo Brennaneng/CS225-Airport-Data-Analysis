@@ -26,7 +26,7 @@ class Map{
     //Map(); //this will create the binary tree
     Map(vector<vector<string>> file, vector<pair<int,int>> routeFile);
 
-    void printName(int ID);
+    void printData(int ID);
     
     void printAirports();
 
