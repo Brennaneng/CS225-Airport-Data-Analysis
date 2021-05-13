@@ -130,8 +130,11 @@ void Map::printData(int ID){
     // cout<<endl;
 };
 
-vector<int> Map::findPath(int startID, int finalID){
+vector<int> Map::findPath(int startID, int finalID, bool display){
     //this finds a path between any two IDs using BFS
+    //the display variable displays what is currently happening in the BFS. It is set true in the test cases
+    //in order to show that the BFS is working properly but turned off when reading the actual CSV data since it will
+    //congest the terminal
     vector<int> path;
 
     //if neither ID exists, then a path cannot exist
@@ -148,27 +151,40 @@ vector<int> Map::findPath(int startID, int finalID){
     while(!traversal.empty()){
         int currID = traversal.front();
         MapNode *curr = &IDTable_[currID];
+        if(display)
+            cout<<"Popping and currently proccessing node: "<<currID<<endl;
         traversal.pop();
 
         while(!traversal.empty() && curr->currentWeight!=-1){
             currID = traversal.front();
             curr = &IDTable_[currID];
+            if(display)
+              cout<<"The current node has already been visited. Popping and now currently processing node: "<<currID<<endl;
             traversal.pop();
         }
 
         curr->currentWeight = 1;
         //this for loop iterates through all the nodes the current node points to
         //if the next potential node has already been visited, we don't care about it
+        if(curr->nodes.size() == 0 && display)
+            cout<<"The current node doesn't point anywhere"<<endl;
         for(unsigned i = 0; i < curr->nodes.size(); i++){
             int nextID = curr->nodes[i];
             MapNode *nextPotential = &IDTable_[nextID];
             if(nextPotential->currentWeight == -1){
                 traversal.push(nextID);
+                if(display == true)
+                    cout<<"Pushing "<<nextID<<" to the queue"<<endl;
                 nextPotential->prev = currID;
                 if(nextID == finalID){
+                    if(display == true)
+                        cout<<"The ID that was pushed is the destinationID"<<endl;
                     flag = true;
                     break;
                 }
+            } else{
+                if(display == true)
+                    cout<<"ID "<<nextID<<" has already been visited. Not pushing to queue"<<endl;
             }
         }
         if(flag)

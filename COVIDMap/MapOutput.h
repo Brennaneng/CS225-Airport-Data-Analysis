@@ -39,7 +39,7 @@ class Map{
 
     void insertStates();
 
-    vector<int> findPath(int startID, int finalID);
+    vector<int> findPath(int startID, int finalID, bool display);
 
     vector<int> findSCC(vector<vector<string>> file);
 
