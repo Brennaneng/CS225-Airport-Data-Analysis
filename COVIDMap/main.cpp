@@ -106,7 +106,6 @@ int main(int argc, char** param) {
 
     }
     else if (alg == "TEST4"){
-<<<<<<< HEAD
         cout<<"This test case runs Tarjan's Strongly Connected Componetns Algortihm on a given directed graph"<<endl;
         cout<<"It should also return all the nodes in SuperNode 6 "<<endl;
         Map SCC(file_test,routeFile_test);
@@ -116,17 +115,6 @@ int main(int argc, char** param) {
                 cout<<"------->"<<file_test[i][1]<<" is part of SuperNode "<<sccs[i]<<endl;
             }
         }
-=======
-        cout<<"This test case runs BFS to find a path between to airport IDs [1] and [10]"<<endl;
-        cout<<"This BFS algorithm assumes the distances between all paths are equal, so that printed path "<<endl;
-        cout<<"isn't necessarily the shortest path. If you want the shortest path, try out DIJKSTRA's algorithm"<<endl;
-        cout<<"---------------------"<<endl;
-
-        Map BFS(file_test,routeFile_test);
-        BFS.printData(1);
-        BFS.printData(10);
-        BFS.findPath(1, 10, true);
->>>>>>> bbefeeb2b1ef05b5b08f09de5e2eb9f35eee6750
 
     }
     else if (alg == "TEST5") {
