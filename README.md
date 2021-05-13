@@ -8,33 +8,33 @@
 
 * MapOutput.cpp/h - containts all the code for our three algorithms and their helper functions
 
-    * vector<int> findSCC (vector<vector<string>> file) - this finds the strongly connected component of our dataset 
+    * **vector<int> findSCC (vector<vector<string>> file)**- this finds the strongly connected component of our dataset 
 
-    * void dijkstra(int src, int des) - this find the shortest path between the source and destination 
+    * **void dijkstra(int src, int des)** - this find the shortest path between the source and destination 
 
-    * void findPath(int StartID, int finaID) - this finds a bfs path between the source and destination 
+    * **void findPath(int StartID, int finaID)** - this finds a bfs path between the source and destination 
 
-    * double EulerPath(double lat1, double long1, double lat2, double long2) - the code for this was taken from: https://www.geeksforgeeks.org/program-distance-two-points-earth/
+    * **double EulerPath(double lat1, double long1, double lat2, double long2)** - the code for this was taken from: https://www.geeksforgeeks.org/program-distance-two-points-earth/
 
-    * Struct MapNode - this is used to hold the information from the CSV file 
+    * **Struct MapNode** - this is used to hold the information from the CSV file 
 
-    * LPHashTable<int, MapNode> IDTable_ - this is where our hash table is made with the MapNode that holds all our information 
+    * **LPHashTable<int, MapNode> IDTable_** - this is where our hash table is made with the MapNode that holds all our information 
 
 * ReadFile.cpp/h - contains the code to read the csv files and organize the data 
 
-    * vector<vector<string>> read_file() - this is where all the important information of airports_fitered.csv will be stored 
+    * **vector<vector<string>> read_file()**- this is where all the important information of airports_fitered.csv will be stored 
 
-    * vector<pair<int , int>> read_routes() - this is where all the routes from routes_filtered.csv will be stored 
+    * **vector<pair<int , int>> read_routes()** - this is where all the routes from routes_filtered.csv will be stored 
 
 * HashTable.cpp/h - contains the code to create the hash table that will help us organize important information 
 
 * main.cpp - this is where we set up for the test cases by getting the file and making the appropriates structs  
 
-    * vector<vector<string>> file = read_file() - will initialize the information we need fromm airports_fitered.csv
+    * **vector<vector<string>> file = read_file()** - will initialize the information we need fromm airports_fitered.csv
 
-    * vector<pair<int,int>> routeFile = read_routes() - will initialize the routes we need from routes_filtered.csv
+    * **vector<pair<int,int>> routeFile = read_routes()** - will initialize the routes we need from routes_filtered.csv
 
-    * Map airports(file, routeFile) - this will make the map that will have all the information we need to run our test cases 
+    * **Map airports(file, routeFile)** - this will make the map that will have all the information we need to run our test cases 
 
 * Other files in the COVIDMap folder are imported from past labs and helped out with the creation of the hash table 
 
