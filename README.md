@@ -66,9 +66,18 @@
 
     * If you have questions on how to run our test cases you can just run $ ./COVIDMap in the terminal and you will be given more information on how to do so 
 
-    * After running the command on the terminal the results will be displayed on the terminal. 
+    * After running the command on the terminal the results will be displayed on the terminal.
+    
+    * If you are not running a test case you will run this in the terminal $ ./COVIDMap "algorithm" "sourceID" "destination ID" into the terminal with the parameters you would like
+    
+      * the instructions are specified when you type ./COVIDMap if you need further help 
 
 3. **Using Another DataSet** When creating this code we based it on the CSV files we used. That is why our readfile functions and hash table are very specific to accomodate the information we needed such as the coordinates of an airport, there ID and the routes a specific airport can have. If you were to use a different dataset some changes would have to be made in our READFILE.cpp. These changes would cause more changes in later functions such as the Hash table and would be troublesosme since you would have modify our "structs". If you were to use a different dataset the CSV file would have to be exactly in the style of our CSV file. This is why it is recommended to use our CSV file since there is no direct instructions we can give if you were to use a different data set. 
+
+4. **Resources and Video** 
+* Link to our final presentation: https://drive.google.com/file/d/1cBFSs4mC9YkDWigglAXHeY80bmqxwMzl/view?usp=sharing
+
+* Link to our powerpoint: https://docs.google.com/presentation/d/1UcxvWmSehw1QZiqbb7SuktiMFetoEwhW0zlnm4hz7k4/edit?usp=sharing
 
 
 
